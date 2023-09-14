@@ -89,17 +89,17 @@ table 50402 "Agreement Table"
     var
         myInt: Integer;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        "Property No Series": Record "No Series Setup";
+        "Properties No Series": Record "No Series Setup";
 
     trigger OnInsert()
     begin
-        "Property No Series".Init();
-        if "Property No Series".FindSet() then
+        "Properties No Series".Init();
+        if "Properties No Series".FindSet() then
             repeat
-                Message('Property No %1', "Property No Series"."Property No Series");
+                Message('Property No %1', "Properties No Series"."Agreement No Series");
                 IF "Agreement No." = '' then
-                    NoSeriesMgt.InitSeries("Property No Series"."Agreement No Series", "Property No Series"."Agreement No Series", 0D, "Agreement No.", "Property No Series"."Agreement No Series");
-            until "Property No Series".Next() = 0;
+                    NoSeriesMgt.InitSeries("Properties No Series"."Agreement No Series", "Properties No Series"."Agreement No Series", 0D, "Agreement No.", "Properties No Series"."Agreement No Series");
+            until "Properties No Series".Next() = 0;
     end;
 
     trigger OnModify()

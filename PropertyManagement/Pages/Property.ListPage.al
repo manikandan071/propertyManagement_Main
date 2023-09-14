@@ -1,4 +1,4 @@
-page 50302 PageName
+page 50302 "Property List"
 {
     PageType = List;
     ApplicationArea = All;

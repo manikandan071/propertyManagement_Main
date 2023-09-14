@@ -64,17 +64,17 @@ table 50403 "Property Table1"
     var
         myInt: Integer;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        "Property No Series": Record "No Series Setup";
+        "Properties No Series": Record "No Series Setup";
 
     trigger OnInsert()
     begin
-        "Property No Series".Init();
-        if "Property No Series".FindSet() then
+        "Properties No Series".Init();
+        if "Properties No Series".FindSet() then
             repeat
-                Message('Property No %1', "Property No Series"."Property No Series");
+                Message('Property No %1', "Properties No Series"."Property No Series");
                 IF "Property No" = '' then
-                    NoSeriesMgt.InitSeries("Property No Series"."Property No Series", "Property No Series"."Property No Series", 0D, "Property No", "Property No Series"."Property No Series");
-            until "Property No Series".Next() = 0;
+                    NoSeriesMgt.InitSeries("Properties No Series"."Property No Series", "Properties No Series"."Property No Series", 0D, "Property No", "Properties No Series"."Property No Series");
+            until "Properties No Series".Next() = 0;
     end;
 
     trigger OnModify()

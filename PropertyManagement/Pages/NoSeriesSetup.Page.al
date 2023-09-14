@@ -29,6 +29,11 @@ page 50300 "No series Setup"
                     ApplicationArea = All;
                     Caption = 'Agreement No.';
                 }
+                field("Charges No Series"; Rec."Charges No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Charges No.';
+                }
             }
         }
     }
