@@ -71,6 +71,11 @@ table 50402 "Agreement Table"
             CalcFormula = lookup(Customer."E-Mail" where("No." = field("Customer No.")));
             Editable = false;
         }
+        field(13; "Agreement Sign"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
     }
 
     keys

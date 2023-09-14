@@ -17,6 +17,11 @@ page 50304 "Agreement Card Page"
                     ApplicationArea = All;
                     Caption = 'Agreement No.';
                 }
+                field("Agreement Sign"; Rec."Agreement Sign")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Agreement Sign';
+                }
             }
             group(Customer)
             {
@@ -72,21 +77,32 @@ page 50304 "Agreement Card Page"
         }
     }
 
-    // actions
-    // {
-    //     area(Processing)
-    //     {
-    //         action(ActionName)
-    //         {
-    //             ApplicationArea = All;
+    actions
+    {
+        area(Processing)
+        {
+            action(Submit)
+            {
+                ApplicationArea = All;
 
-    //             trigger OnAction()
-    //             begin
-
-    //             end;
-    //         }
-    //     }
-    // }
+                trigger OnAction()
+                var
+                    PropertyList: Record "Property Table1";
+                begin
+                    Rec."Agreement Sign" := true;
+                    PropertyList.Init();
+                    PropertyList.Reset();
+                    PropertyList.SetFilter(PropertyList."Property No", Rec."Property No.");
+                    if PropertyList.FindSet() then begin
+                        PropertyList."Tenant detail" := Rec."Customer No.";
+                        PropertyList.Status := PropertyList.Status::Booked;
+                        PropertyList.Modify();
+                        Message('Property No. %1', PropertyList."Property No");
+                    end;
+                end;
+            }
+        }
+    }
 
     var
         myInt: Integer;
