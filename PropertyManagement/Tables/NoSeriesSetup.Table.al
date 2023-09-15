@@ -28,6 +28,11 @@ table 50400 "No Series Setup"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(6; "Charges No Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
     }
 
     keys
