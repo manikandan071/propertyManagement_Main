@@ -34,6 +34,19 @@ page 50300 "No series Setup"
                     ApplicationArea = All;
                     Caption = 'Charges No.';
                 }
+
+                field("Rent No Series"; Rec."Rent No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Charges No.';
+                }
+
+                field("Exit No Series"; Rec."Exit No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Exit No Series';
+                }
+
             }
         }
     }
@@ -57,3 +70,4 @@ page 50300 "No series Setup"
     var
         myInt: Integer;
 }
+
