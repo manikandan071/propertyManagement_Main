@@ -21,7 +21,7 @@ page 50500 PropertyManagementRoleCenter
                 {
                     ApplicationArea = All;
                     Caption = 'Property Details';
-                    RunObject = page PageName;
+                    RunObject = page "Property List";
                 }
 
             }
@@ -33,7 +33,7 @@ page 50500 PropertyManagementRoleCenter
             {
                 Caption = 'Add New Property';
                 Image = NewItem;
-                RunObject = Page PageName;
+                RunObject = Page "Property List";
                 RunPageMode = View;
             }
         }
@@ -44,7 +44,7 @@ page 50500 PropertyManagementRoleCenter
             {
                 Caption = 'Register New Booking';
                 Image = NewInvoice;
-                RunObject = Page "PageName";
+                RunObject = Page "Property List";
                 RunPageMode = View;
             }
 
