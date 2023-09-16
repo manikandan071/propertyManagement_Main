@@ -33,6 +33,18 @@ table 50400 "No Series Setup"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+
+        field(7; "Rent No Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+
+        field(8; "Exit No Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
     }
 
     keys
