@@ -46,6 +46,16 @@ page 50300 "No series Setup"
                     ApplicationArea = All;
                     Caption = 'Exit No Series';
                 }
+                field("Inspection No Series"; Rec."Inspection No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Inspection No Series';
+                }
+                field("Maintenance No Series"; Rec."Maintenance No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Maintenance No Series';
+                }
 
             }
         }
