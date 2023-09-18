@@ -13,21 +13,22 @@ page 50312 RentCardPage
             {
                 Caption = 'General';
 
-                field(Amount; Rec.Amount)
+                field(RentNo; Rec.RentNo)
                 {
-                    ToolTip = 'Specifies the value of the Amount field.';
-                }
-                field("Date Of Paid"; Rec."Date Of Paid")
-                {
-                    ToolTip = 'Specifies the value of the Date Of Paid field.';
+                    ToolTip = 'Specifies the value of the RentNo field.';
                 }
                 field(PropertyNo; Rec.PropertyNo)
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
-                field(RentNo; Rec.RentNo)
+                field("Date Of Paid"; Rec."Date Of Paid")
                 {
-                    ToolTip = 'Specifies the value of the RentNo field.';
+                    ToolTip = 'Specifies the value of the Date Of Paid field.';
+                }
+
+                field(Amount; Rec.Amount)
+                {
+                    ToolTip = 'Specifies the value of the Amount field.';
                 }
             }
         }

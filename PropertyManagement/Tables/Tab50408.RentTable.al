@@ -8,6 +8,7 @@ table 50408 RentTable
         field(1; RentNo; Code[20])
         {
             Caption = 'RentNo';
+            Editable = false;
         }
         field(2; PropertyNo; Code[20])
         {

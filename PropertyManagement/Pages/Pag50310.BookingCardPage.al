@@ -21,6 +21,13 @@ page 50310 BookingCardPage
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
+
+            }
+
+            group(CustomerDetails)
+            {
+                Caption = 'Customer Details';
+
                 field("Customer Name"; Rec."Customer Name")
                 {
                     ToolTip = 'Specifies the value of the Customer Name field.';

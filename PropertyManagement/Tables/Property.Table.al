@@ -37,8 +37,8 @@ table 50403 "Property Table1"
         field(8; "Status"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "","Available","Booked";
-            Editable = false;
+            OptionMembers = "Available","Booked","Agreement Signed";
+            //Editable = false;
         }
     }
 
@@ -71,7 +71,6 @@ table 50403 "Property Table1"
         "Properties No Series".Init();
         if "Properties No Series".FindSet() then
             repeat
-                Message('Property No %1', "Properties No Series"."Property No Series");
                 IF "Property No" = '' then
                     NoSeriesMgt.InitSeries("Properties No Series"."Property No Series", "Properties No Series"."Property No Series", 0D, "Property No", "Properties No Series"."Property No Series");
             until "Properties No Series".Next() = 0;
