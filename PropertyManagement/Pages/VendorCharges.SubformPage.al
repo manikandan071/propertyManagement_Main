@@ -1,7 +1,7 @@
 page 50308 "Vendor Charges Subform"
 {
     PageType = ListPart;
-    SourceTable = "Vendor Charges Lines";
+    SourceTable = "Vendor Charges Lines New";
     Caption = 'Charges Lines';
     layout
     {
@@ -9,6 +9,10 @@ page 50308 "Vendor Charges Subform"
         {
             repeater(Lines)
             {
+                field("Charge Line No."; Rec."Charge Line No.")
+                {
+
+                }
                 field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = All;
