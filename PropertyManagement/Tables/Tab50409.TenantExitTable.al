@@ -25,6 +25,12 @@ table 50409 TenantExitTable
             Caption = 'Status';
             OptionMembers = "Booked","Exited";
         }
+        field(5; TenantDetails; Code[100])
+        {
+            Caption = 'Tenant Details';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Agreement Table"."Customer No." where("Property No." = field(PropertyNo)));
+        }
     }
     keys
     {

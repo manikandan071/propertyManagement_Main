@@ -74,7 +74,7 @@ table 50402 "Agreement Table"
         field(13; "Agreement Sign"; Boolean)
         {
             DataClassification = ToBeClassified;
-            Editable = false;
+            //Editable = false;
         }
     }
 

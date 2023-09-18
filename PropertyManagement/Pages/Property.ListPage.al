@@ -27,11 +27,11 @@ page 50302 "Property List"
                     ApplicationArea = All;
                     Caption = 'Property Owner';
                 }
-                field("Tenant detail"; Rec."Tenant detail")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Tenant detail';
-                }
+                // field("Tenant detail"; Rec."Tenant detail")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Tenant detail';
+                // }
                 field("Deposit Amount"; Rec."Deposit Amount")
                 {
                     ApplicationArea = All;

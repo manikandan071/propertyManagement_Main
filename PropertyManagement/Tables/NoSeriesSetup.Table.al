@@ -2,11 +2,13 @@ table 50400 "No Series Setup"
 {
     DataClassification = ToBeClassified;
     Caption = 'No Series Setup';
+    //DataCaptionFields = "Property No Series";
     fields
     {
         field(1; "Primary Key"; Integer)
         {
             DataClassification = ToBeClassified;
+
         }
         field(2; "Property No Series"; code[20])
         {

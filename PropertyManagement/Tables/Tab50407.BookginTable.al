@@ -8,11 +8,12 @@ table 50407 BookingTable
         field(1; BookingNo; Code[20])
         {
             Caption = 'BookingNo';
+            Editable = false;
         }
         field(2; PropertyNo; Code[20])
         {
             Caption = 'PropertyNo';
-            TableRelation = "Property Table1";
+            TableRelation = "Property Table1" where(Status = filter('Available'));
         }
         field(3; "Customer Name"; Text[100])
         {

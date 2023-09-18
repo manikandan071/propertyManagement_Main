@@ -21,13 +21,18 @@ page 50314 TenantExitCardPage
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
-                field(TenantName; Rec.TenantName)
-                {
+                // field(TenantName; Rec.TenantName)
+                // {
 
-                }
+                // }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.';
+                }
+
+                field(TenantNameNew; Rec.TenantDetails)
+                {
+
                 }
             }
         }

@@ -20,7 +20,7 @@ page 50304 "Agreement Card Page"
                 field("Agreement Sign"; Rec."Agreement Sign")
                 {
                     ApplicationArea = All;
-                    Caption = 'Agreement Sign';
+                    Caption = 'Agreement Sign Completed';
                 }
             }
             group(Customer)
