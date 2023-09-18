@@ -62,11 +62,14 @@ page 50495 "Approval Page"
         email: Codeunit Email;
         HtmlContent: Text;
 
+
     // HttpClient: HttpClient;
     // Response: ;
     // Body: Text[1000];
     begin
-
+        // Rec.Get();
+        // approvaltable.Get();
+        // RecID:=approvaltable.RecordId();
         HtmlContent := '<h1>Hi Kali </h1></br><a target="_blank" href=https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50495&dc=0">Click Here</a>';
         mail.Create('Ram@chandrudemo.onmicrosoft.com', 'this is the subject', HtmlContent, true);
         email.Send(mail);

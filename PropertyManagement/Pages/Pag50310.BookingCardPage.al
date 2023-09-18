@@ -61,19 +61,31 @@ page 50310 BookingCardPage
                         PropertyList.SetFilter(PropertyList."Property No", Rec.PropertyNo);
                         if PropertyList.FindSet() then begin
                             PropertyList."Tenant detail" := Rec."Customer Name";
-                            PropertyList.Status := PropertyList.Status::Available;
+                            PropertyList.Status := PropertyList.Status::Booked;
                             PropertyList.Modify();
                             Message('Property No %1 Booked', PropertyList."Property No");
                         end;
                         if Rec.PropertyNo <> xRec.PropertyNo then begin
+                            Message('if %1', xRec.PropertyNo);
                             PropertyList.Init();
                             PropertyList.Reset();
                             PropertyList.SetFilter(PropertyList."Property No", xRec.PropertyNo);
                             if PropertyList.FindSet() then begin
                                 PropertyList."Tenant detail" := '';
-                                PropertyList.Status := PropertyList.Status::Available;
+                                PropertyList.Status := PropertyList.Status::Booked;
                                 PropertyList.Modify();
                                 Message('Modified Property No %1 Booked. %2', PropertyList."Property No", xRec.PropertyNo);
+                            end;
+                            if xRec.PropertyNo <> '' then begin
+                                PropertyList.Init();
+                                PropertyList.Reset();
+                                PropertyList.SetFilter(PropertyList."Property No", xRec.PropertyNo);
+                                if PropertyList.FindSet() then begin
+                                    PropertyList."Tenant detail" := Rec."Customer Name";
+                                    PropertyList.Status := PropertyList.Status::Available;
+                                    PropertyList.Modify();
+                                    Message('Property No %1 Booked', PropertyList."Property No");
+                                end;
                             end;
                         end
                     end
