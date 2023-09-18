@@ -95,7 +95,7 @@ page 50304 "Agreement Card Page"
                     PropertyList.SetFilter(PropertyList."Property No", Rec."Property No.");
                     if PropertyList.FindSet() then begin
                         PropertyList."Tenant detail" := Rec."Customer No.";
-                        PropertyList.Status := PropertyList.Status::Booked;
+                        PropertyList.Status := PropertyList.Status::"Agreement Signed";
                         PropertyList.Modify();
                         Message('Property No. %1', PropertyList."Property No");
                     end;

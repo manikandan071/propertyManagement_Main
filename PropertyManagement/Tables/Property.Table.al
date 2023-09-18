@@ -12,6 +12,7 @@ table 50403 "Property Table1"
         field(2; "Property No"; Code[20])
         {
             DataClassification = ToBeClassified;
+            Editable = false;
         }
         field(3; "Property Description"; code[30])
         {
