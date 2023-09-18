@@ -21,6 +21,12 @@ table 50406 "Vendor Charges Lines"
             DataClassification = ToBeClassified;
             Caption = 'Service Charge';
         }
+        field(4; "VendorNumber"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Service Charge';
+            TableRelation = Vendor;
+        }
     }
 
     keys
@@ -33,9 +39,26 @@ table 50406 "Vendor Charges Lines"
 
     var
         myInt: Integer;
+    // ChargesDetails: Record "Vendor Charges Header";
+    // NewNumber: Code[20];
 
     trigger OnInsert()
     begin
+
+        // ChargesDetails.Init();
+        // ChargesDetails.Reset();
+        // ChargesDetails.SetFilter("Charge No.", Rec."Document No.");
+        // if ChargesDetails.FindFirst() then begin
+        //     Message(ChargesDetails."Vendor No.");
+        //     NewNumber := ChargesDetails."Vendor No.";
+        // end;
+
+        // Message(NewNumber);
+        // if NewNumber <> '' then begin
+        //     Rec.Get();
+        //     Rec.VendorNumber := NewNumber;
+        //     Rec.Modify();
+        // end;
 
     end;
 

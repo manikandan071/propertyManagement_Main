@@ -38,7 +38,7 @@ page 50300 "No series Setup"
                 field("Rent No Series"; Rec."Rent No Series")
                 {
                     ApplicationArea = All;
-                    Caption = 'Charges No.';
+                    Caption = 'Rent No.';
                 }
 
                 field("Exit No Series"; Rec."Exit No Series")

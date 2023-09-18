@@ -12,7 +12,7 @@ table 50313 "Maintenance Lines1"
         field(2; "Inspection No"; Code[20])
         {
             DataClassification = ToBeClassified;
-            // TableRelation = "Inspection Table";
+            TableRelation = "Inspection Table";
         }
         field(3; "Inspection Description"; Code[20])
         {
@@ -26,7 +26,7 @@ table 50313 "Maintenance Lines1"
         field(5; "Vendor Name"; Code[100])
         {
             // FieldClass = FlowField;
-            // CalcFormula = lookup("Vendor Charges Header"."Vendor Name" where("Vendor No." = field("Vendor No")));
+            // CalcFormula = lookup("Vendor Charges Header"."Vendor Name");
             // Editable = false;
         }
         field(6; "Vendor Charge No"; Code[20])
