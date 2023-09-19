@@ -15,7 +15,11 @@ page 50496 "Approval List"
                 {
                     ApplicationArea = All;
                 }
-                field(Status; Rec.Status)
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = All;
+                }
+                field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = All;
                 }

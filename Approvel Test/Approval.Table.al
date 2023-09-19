@@ -20,6 +20,14 @@ table 50495 "Approval Table"
             DataClassification = CustomerContent;
             OptionMembers = "","Pending","Approved";
         }
+        field(3; "Description"; Text[100])
+        {
+            DataClassification = CustomerContent;
+        }
+        field(4; "Approval Status"; enum "Approval Enum")
+        {
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
