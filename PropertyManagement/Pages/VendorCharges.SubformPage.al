@@ -11,7 +11,7 @@ page 50308 "Vendor Charges Subform"
             {
                 field("Charge Line No."; Rec."Charge Line No.")
                 {
-
+                    ApplicationArea = All;
                 }
                 field("Document No."; Rec."Document No.")
                 {

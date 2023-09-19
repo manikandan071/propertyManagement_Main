@@ -65,6 +65,7 @@ page 50307 "Vendor Charges"
         }
     }
 
+
     var
         myInt: Integer;
 }
