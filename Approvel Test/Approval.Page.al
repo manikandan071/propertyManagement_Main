@@ -170,19 +170,18 @@ page 50495 "Approval Page"
     //         exit(false);
     // end;
 
-<<<<<<< HEAD
-    procedure UserHasPermission(): Boolean
-    begin
-        // Replace this logic with your own criteria for enabling/disabling the action button
-        // For example, you can check the current user's ID
-        // and return true if they have permission to use the button, false otherwise
+    // procedure UserHasPermission(): Boolean
+    // begin
+    // Replace this logic with your own criteria for enabling/disabling the action button
+    // For example, you can check the current user's ID
+    // and return true if they have permission to use the button, false otherwise
 
-        // Replace 'YourUserID' with the actual user ID you want to check
-        if UserId = 'RAM' then
-            exit(true)
-        else
-            exit(false);
-    end;
+    // Replace 'YourUserID' with the actual user ID you want to check
+    // if UserId = 'RAM' then
+    //     exit(true)
+    // else
+    //     exit(false);
+    // end;
 
     procedure SendEmailAndUpdateStatus()
     var
@@ -192,22 +191,12 @@ page 50495 "Approval Page"
         HtmlContent: Text;
         RecID: RecordId;
         Link: Text;
-=======
-    // procedure SendEmailAndUpdateStatus()
-    // var
-    //     approvaltable: Record "Approval Table";
-    //     mail: Codeunit "Email Message";
-    //     email: Codeunit Email;
-    //     HtmlContent: Text;
-
->>>>>>> 23e44f81a59a815f01cc1b94f4ce31c8fc69c73b
 
     // HttpClient: HttpClient;
     // Response: ;
     // Body: Text[1000];
-<<<<<<< HEAD
     begin
-        // Rec.Get();
+        Rec.Get();
         approvaltable.Get();
         RecID := approvaltable.RecordId();
         Link := StrSubstNo('https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50495&dc=0', RecID);
@@ -215,20 +204,10 @@ page 50495 "Approval Page"
         mail.Create('Ram@chandrudemo.onmicrosoft.com', 'this is the subject', HtmlContent, true);
         email.Send(mail);
         Message('Mail send Successfully %1', UserId);
-        //Rec.Status := Rec.Status::Approved;
-=======
-    // begin
-    //     Rec.Get();
-    //     approvaltable.Get();
-    //     RecID:=approvaltable.RecordId();
-    //     HtmlContent := '<h1>Hi Kali </h1></br><a target="_blank" href=https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50495&dc=0">Click Here</a>';
-    //     mail.Create('Ram@chandrudemo.onmicrosoft.com', 'this is the subject', HtmlContent, true);
-    //     email.Send(mail);
-    //     Message('Mail send Successfully %1', UserId);
-    //     Rec.Status := Rec.Status::Approved;
->>>>>>> 23e44f81a59a815f01cc1b94f4ce31c8fc69c73b
+        // Rec.Status := Rec.Status::Approved;
 
-    // end;
+    end;
+
     trigger OnAfterGetCurrRecord()
     begin
         OpenApprovalEntriesExistCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Rec.RecordId);

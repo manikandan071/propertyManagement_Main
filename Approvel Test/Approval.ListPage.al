@@ -4,7 +4,7 @@ page 50496 "Approval List"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Approval Table";
-    CardPageId = "Approval Page";
+    CardPageId = "ApprovalExt";
     layout
     {
         area(Content)
