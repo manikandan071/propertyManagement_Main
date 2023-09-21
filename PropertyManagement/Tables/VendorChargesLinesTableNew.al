@@ -62,16 +62,12 @@ table 50415 "Vendor Charges Lines New"
                 Message(ChargesDetails."Vendor No.");
                 Message(ChargesDetails."Charge No.");
                 if ChargesDetails."Vendor No." <> '' then begin
-                    Rec.Init();
-                    //Rec."Service Description" := xRec."Service Description";
-                    //Rec."Service Charge" := xRec."Service Charge";
                     Rec."Document No." := ChargesDetails."Charge No.";
                     Rec.VendorNumber := ChargesDetails."Vendor No.";
                     Rec.Modify();
                 end;
             end;
         end;
-        Message(NewNumber);
     end;
 
     trigger OnDelete()
