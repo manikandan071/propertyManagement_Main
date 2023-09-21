@@ -44,14 +44,14 @@ codeunit 50460 Workflowsetupext
         Book: Record "Approval Table";
     begin
         WorkflowSetup.InitWorkflowStepArgument(workflowsteparugument, workflowsteparugument."Approver Type"::Approver, workflowsteparugument."Approver Limit Type"::"Direct Approver", 0, '', blankdateformula, true);
-        WorkflowSetup.InsertDocApprovalWorkflowSteps(workflow, Buildclaimtypecondition(Book."Approval Status"::Open), workfloweventhandlingcust.Runworkflowonsendclaimforapprovalcode, Buildclaimtypecondition(Book."Approval Status"::Pending), workfloweventhandlingcust.RunWorkFlowOncancelClaimForApprovalcode, workflowsteparugument, true);
+        WorkflowSetup.InsertDocApprovalWorkflowSteps(workflow, Buildclaimtypecondition(Book."Approval Status1"::Open), workfloweventhandlingcust.Runworkflowonsendclaimforapprovalcode, Buildclaimtypecondition(Book."Approval Status1"::Pending), workfloweventhandlingcust.RunWorkFlowOncancelClaimForApprovalcode, workflowsteparugument, true);
     end;
 
-    local procedure Buildclaimtypecondition(staus: Integer): Text
+    local procedure Buildclaimtypecondition(Status: Integer): Text
     var
         Book: Record "Approval Table";
     begin
-        Book.SetRange("Approval Status", staus);
+        Book.SetRange("Approval Status1", Status);
         exit(StrSubstNo(ClaimTypeCondTxt, WorkflowSetup.Encode(Book.GetView(false))));
     end;
 

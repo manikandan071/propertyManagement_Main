@@ -67,7 +67,7 @@ codeunit 50495 "Custom Workflow Mgmt"
             Database::"Approval Table":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
-                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status"::Open);
+                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status1"::Open);
                     CustomWorkflowHdr.Modify(true);
                     Handled := true;
                 end;
@@ -83,7 +83,7 @@ codeunit 50495 "Custom Workflow Mgmt"
             Database::"Approval Table":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
-                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status"::Pending);
+                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status1"::Pending);
                     CustomWorkflowHdr.Modify(true);
                     Variant := CustomWorkflowHdr;
                     IsHandled := true;
@@ -114,7 +114,7 @@ codeunit 50495 "Custom Workflow Mgmt"
             DataBase::"Approval Table":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
-                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status"::Approved);
+                    CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status1"::Approved);
                     CustomWorkflowHdr.Modify(true);
                     Handled := true;
                 end;
@@ -132,7 +132,7 @@ codeunit 50495 "Custom Workflow Mgmt"
             DataBase::"Approval Table":
                 begin
                     if CustomWorkflowHdr.Get(ApprovalEntry."Document No.") then begin
-                        CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status"::Rejected);
+                        CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr."Approval Status1"::Rejected);
                         CustomWorkflowHdr.Modify(true);
                     end;
                 end;

@@ -26,7 +26,7 @@ codeunit 50496 "Approval Mgmt Extension"
 
     procedure isclaimdocapprovalsworkflowenabled(var Book: Record "Approval Table"): Boolean
     begin
-        if Book."Approval Status" <> Book."Approval Status"::Open then
+        if Book."Approval Status1" <> Book."Approval Status1"::Open then
             exit(false);
         exit(workflowmanagement.CanExecuteWorkflow(Book, workfloweventhandlingcust.Runworkflowonsendclaimforapprovalcode));
     end;

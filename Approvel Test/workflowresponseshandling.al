@@ -15,7 +15,7 @@ codeunit 50493 "workflowresponsehandlingext"
             database::"Approval Table":
                 begin
                     RecRef.SetTable(Book);
-                    Book."Approval Status" := Book."Approval Status"::Open;
+                    Book."Approval Status1" := Book."Approval Status1"::Open;
                     Book.Modify();
                     Handled := true;
                 end;
@@ -32,7 +32,7 @@ codeunit 50493 "workflowresponsehandlingext"
             database::"Approval Table":
                 begin
                     RecRef.SetTable(Book);
-                    Book."Approval Status" := Book."Approval Status"::Approved;
+                    Book."Approval Status1" := Book."Approval Status1"::Approved;
                     Book.Modify();
                     Handled := true;
                 end;
@@ -48,7 +48,7 @@ codeunit 50493 "workflowresponsehandlingext"
             database::"Approval Table":
                 begin
                     RecRef.SetTable(Book);
-                    Book."Approval Status" := Book."Approval Status"::Pending;
+                    Book."Approval Status1" := Book."Approval Status1"::Pending;
                     Book.Modify();
                     IsHandled := true;
                 end;

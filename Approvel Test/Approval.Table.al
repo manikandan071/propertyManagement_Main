@@ -28,6 +28,11 @@ table 50495 "Approval Table"
         {
             DataClassification = CustomerContent;
         }
+        field(5; "Approval Status1"; Option)
+        {
+            DataClassification = CustomerContent;
+            OptionMembers = Open,Pending,Approved,Rejected;
+        }
     }
 
     keys

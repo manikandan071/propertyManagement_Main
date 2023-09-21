@@ -17,7 +17,7 @@ page 50495 "Approval Page"
                 {
                     ApplicationArea = All;
                 }
-                field("Approval Status"; Rec."Approval Status")
+                field("Approval Status"; Rec."Approval Status1")
                 {
                     ApplicationArea = All;
                 }
