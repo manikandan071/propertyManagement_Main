@@ -62,6 +62,6 @@ codeunit 50460 Workflowsetupext
         ClaimWorkflowCategoryDescTxt: TextConst ENU = 'Claim Document';
         ClaimApprovalWorkflowCodeTxt: TextConst ENU = 'CAPW';
         ClaimApprovalWorkfowDescTxt: TextConst ENU = 'Claim Approval Workflow';
-        ClaimTypeCondTxt: TextConst ENU = '<?xml version = “1.0” encoding=”utf-8” standalone=”yes”?><ReportParameters><DataItems><DataItem name=”Claim”>%1</DataItem></DataItems></ReportParameters>';
+        ClaimTypeCondTxt: TextConst ENU = '<?xml version = "1.0" encoding="utf-8" standalone="yes"?><ReportParameters><DataItems><DataItem name="Approval Table">%1</DataItem></DataItems></ReportParameters>';
 
 }
