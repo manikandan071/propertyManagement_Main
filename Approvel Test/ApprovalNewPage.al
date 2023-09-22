@@ -78,7 +78,38 @@ page 50497 "ApprovalExt"
                 }
             }
         }
+
+        area(Navigation)
+        {
+            group(TestGroup)
+            {
+                action(testpagenew)
+                {
+                    ApplicationArea = Basic, suite;
+                    Caption = 'Test for debugging';
+                    trigger OnAction()
+                    var
+                        RecRef: RecordRef;
+                    begin
+                        RecRef.Open(Database::"Custom Workflow Header");
+                        //Message(GetWorkflowCodetest(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef));
+                        Message(GetWorkflowEventDesc(WorkflowSendForApprovalEventDescTxt, RecRef));
+                    end;
+                }
+            }
+        }
     }
+
+    procedure GetWorkflowCodetest(WorkflowCode: code[128]; RecRef: RecordRef): Code[128]
+    begin
+        exit(DelChr(StrSubstNo(WorkflowCode, RecRef.Name), '=', ' '));
+    end;
+
+    procedure GetWorkflowEventDesc(WorkflowEventDesc: Text; RecRef: RecordRef): Text
+    begin
+        exit(StrSubstNo(WorkflowEventDesc, RecRef.Name));
+    end;
+
     trigger OnAfterGetRecord()
     begin
         OpenApprovalEntriesExistCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Rec.RecordId);
@@ -97,6 +128,8 @@ page 50497 "ApprovalExt"
         Workflowwebhookmgmnt: codeunit 1543;
         ApprovalmgmntCut: Codeunit 50496;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        RUNWORKFLOWONSENDFORAPPROVALCODE: Label 'RUNWORKFLOWONSEND%1FORAPPROVAL';
+        WorkflowSendForApprovalEventDescTxt: Label 'Approval of %1 is requested.';
 
 
 }

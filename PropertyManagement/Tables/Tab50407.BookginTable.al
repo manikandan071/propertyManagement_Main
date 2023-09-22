@@ -31,6 +31,10 @@ table 50407 BookingTable
         {
             Caption = 'PhoneNumber';
         }
+        field(7; Status; Enum "Custom Approval Enum")
+        {
+            Caption = 'Status';
+        }
     }
     keys
     {

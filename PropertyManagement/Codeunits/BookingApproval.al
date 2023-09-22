@@ -1,4 +1,4 @@
-codeunit 50490 "Custom Workflow Mgmt New"
+codeunit 50407 "Booking Workflow Mgmnt"
 {
     procedure CheckApprovalsWorkflowEnabled(var RecRef: RecordRef): Boolean
     begin
@@ -31,21 +31,21 @@ codeunit 50490 "Custom Workflow Mgmt New"
         RecRef: RecordRef;
         WorkflowEventHandling: Codeunit "Workflow Event Handling";
     begin
-        RecRef.Open(Database::"Custom Workflow Header");
-        WorkflowEventHandling.AddEventToLibrary(GetWorkflowCode(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef), Database::"Custom Workflow Header",
+        RecRef.Open(Database::"BookingTable");
+        WorkflowEventHandling.AddEventToLibrary(GetWorkflowCode(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef), Database::"BookingTable",
           GetWorkflowEventDesc(WorkflowSendForApprovalEventDescTxt, RecRef), 0, false);
-        WorkflowEventHandling.AddEventToLibrary(GetWorkflowCode(RUNWORKFLOWONCANCELFORAPPROVALCODE, RecRef), DATABASE::"Custom Workflow Header",
+        WorkflowEventHandling.AddEventToLibrary(GetWorkflowCode(RUNWORKFLOWONCANCELFORAPPROVALCODE, RecRef), Database::"BookingTable",
           GetWorkflowEventDesc(WorkflowCancelForApprovalEventDescTxt, RecRef), 0, false);
     end;
     // subscribe
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Custom Workflow Mgmt New", 'OnSendWorkflowForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Booking Workflow Mgmnt", 'OnSendWorkflowForApproval', '', false, false)]
     local procedure RunWorkflowOnSendWorkflowForApproval(var RecRef: RecordRef)
     begin
         WorkflowMgt.HandleEvent(GetWorkflowCode(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef), RecRef);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Custom Workflow Mgmt New", 'OnCancelWorkflowForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Booking Workflow Mgmnt", 'OnCancelWorkflowForApproval', '', false, false)]
     local procedure RunWorkflowOnCancelWorkflowForApproval(var RecRef: RecordRef)
     begin
         WorkflowMgt.HandleEvent(GetWorkflowCode(RUNWORKFLOWONCANCELFORAPPROVALCODE, RecRef), RecRef);
@@ -61,10 +61,10 @@ codeunit 50490 "Custom Workflow Mgmt New"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnOpenDocument', '', false, false)]
     local procedure OnOpenDocument(RecRef: RecordRef; var Handled: Boolean)
     var
-        CustomWorkflowHdr: Record "Custom Workflow Header";
+        CustomWorkflowHdr: Record BookingTable;
     begin
         case RecRef.Number of
-            Database::"Custom Workflow Header":
+            Database::"BookingTable":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
                     CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr.Status::Open);
@@ -77,10 +77,10 @@ codeunit 50490 "Custom Workflow Mgmt New"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSetStatusToPendingApproval', '', false, false)]
     local procedure OnSetStatusToPendingApproval(RecRef: RecordRef; var Variant: Variant; var IsHandled: Boolean)
     var
-        CustomWorkflowHdr: Record "Custom Workflow Header";
+        CustomWorkflowHdr: Record BookingTable;
     begin
         case RecRef.Number of
-            Database::"Custom Workflow Header":
+            Database::"BookingTable":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
                     CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr.Status::Pending);
@@ -94,13 +94,13 @@ codeunit 50490 "Custom Workflow Mgmt New"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnPopulateApprovalEntryArgument', '', false, false)]
     local procedure OnPopulateApprovalEntryArgument(var RecRef: RecordRef; var ApprovalEntryArgument: Record "Approval Entry"; WorkflowStepInstance: Record "Workflow Step Instance")
     var
-        CustomWorkflowHdr: Record "Custom Workflow Header";
+        CustomWorkflowHdr: Record BookingTable;
     begin
         case RecRef.Number of
-            DataBase::"Custom Workflow Header":
+            Database::"BookingTable":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
-                    ApprovalEntryArgument."Document No." := CustomWorkflowHdr."No.";
+                    ApprovalEntryArgument."Document No." := CustomWorkflowHdr.BookingNo;
                 end;
         end;
     end;
@@ -108,10 +108,10 @@ codeunit 50490 "Custom Workflow Mgmt New"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnReleaseDocument', '', false, false)]
     local procedure OnReleaseDocument(RecRef: RecordRef; var Handled: Boolean)
     var
-        CustomWorkflowHdr: Record "Custom Workflow Header";
+        CustomWorkflowHdr: Record BookingTable;
     begin
         case RecRef.Number of
-            DataBase::"Custom Workflow Header":
+            Database::"BookingTable":
                 begin
                     RecRef.SetTable(CustomWorkflowHdr);
                     CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr.Status::Approved);
@@ -125,11 +125,11 @@ codeunit 50490 "Custom Workflow Mgmt New"
     local procedure OnRejectApprovalRequest(var ApprovalEntry: Record "Approval Entry")
     var
         RecRef: RecordRef;
-        CustomWorkflowHdr: Record "Custom Workflow Header";
+        CustomWorkflowHdr: Record BookingTable;
         v: Codeunit "Record Restriction Mgt.";
     begin
         case ApprovalEntry."Table ID" of
-            DataBase::"Custom Workflow Header":
+            Database::"BookingTable":
                 begin
                     if CustomWorkflowHdr.Get(ApprovalEntry."Document No.") then begin
                         CustomWorkflowHdr.Validate(Status, CustomWorkflowHdr.Status::Rejected);

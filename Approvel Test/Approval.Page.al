@@ -155,33 +155,31 @@ page 50495 "Approval Page"
                 }
             }
         }
+
+        area(Navigation)
+        {
+            group(TestGroup)
+            {
+                action(testpagenew)
+                {
+                    ApplicationArea = Basic, suite;
+                    Caption = 'Test for debugging';
+                    trigger OnAction()
+                    var
+                        RecRef: RecordRef;
+                    begin
+                        RecRef.Open(Database::"Custom Workflow Header");
+                        Message(GetWorkflowCodetest(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef));
+                    end;
+                }
+            }
+        }
     }
 
-    // procedure UserHasPermission(): Boolean
-    // begin
-    //     // Replace this logic with your own criteria for enabling/disabling the action button
-    //     // For example, you can check the current user's ID
-    //     // and return true if they have permission to use the button, false otherwise
-
-    //     // Replace 'YourUserID' with the actual user ID you want to check
-    //     if UserId = 'RAM' then
-    //         exit(true)
-    //     else
-    //         exit(false);
-    // end;
-
-    // procedure UserHasPermission(): Boolean
-    // begin
-    // Replace this logic with your own criteria for enabling/disabling the action button
-    // For example, you can check the current user's ID
-    // and return true if they have permission to use the button, false otherwise
-
-    // Replace 'YourUserID' with the actual user ID you want to check
-    // if UserId = 'RAM' then
-    //     exit(true)
-    // else
-    //     exit(false);
-    // end;
+    procedure GetWorkflowCodetest(WorkflowCode: code[128]; RecRef: RecordRef): Code[128]
+    begin
+        exit(DelChr(StrSubstNo(WorkflowCode, RecRef.Name), '=', ' '));
+    end;
 
     procedure SendEmailAndUpdateStatus()
     var
@@ -220,6 +218,8 @@ page 50495 "Approval Page"
         OpenApprovalEntriesExistCurrUser, OpenApprovalEntriesExist, CanCancelApprovalForRecord
         , HasApprovalEntries : Boolean;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-    // Rec: Record "Approval Table";
+        // Rec: Record "Approval Table";
+
+        RUNWORKFLOWONSENDFORAPPROVALCODE: Label 'RUNWORKFLOWONSEND%1FORAPPROVAL';
 
 }
