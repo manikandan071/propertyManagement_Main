@@ -45,7 +45,7 @@ page 50302 "Property List"
                 field("Tenant detail"; Rec."Tenant detail")
                 {
                     ApplicationArea = All;
-                    Caption = 'Rent Amount';
+                    Caption = 'Tenant Details';
                 }
                 field(Status; Rec.Status)
                 {

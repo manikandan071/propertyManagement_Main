@@ -33,6 +33,10 @@ page 50309 BookingListPage
                 {
                     ToolTip = 'Specifies the value of the PhoneNumber field.';
                 }
+                field(Status; Rec.Status)
+                {
+                    ToolTip = 'Specifies the value of the Status';
+                }
 
             }
         }
