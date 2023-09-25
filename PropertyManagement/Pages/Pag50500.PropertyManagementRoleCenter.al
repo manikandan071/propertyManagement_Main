@@ -6,6 +6,13 @@ page 50500 PropertyManagementRoleCenter
 
     layout
     {
+        area(RoleCenter)
+        {
+            part(Control139; "Headline RC Property Manager")
+            {
+                ApplicationArea = Basic, Suite;
+            }
+        }
 
     }
 

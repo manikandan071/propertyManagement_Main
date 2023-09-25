@@ -29,7 +29,7 @@ page 50309 BookingListPage
                 {
                     ToolTip = 'Specifies the value of the Email field.';
                 }
-                field(PhoneNumber; Rec.PhoneNumber)
+                field(PhoneNumber; Rec.PhoneNumber1)
                 {
                     ToolTip = 'Specifies the value of the PhoneNumber field.';
                 }

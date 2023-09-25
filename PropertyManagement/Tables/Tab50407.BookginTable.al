@@ -35,6 +35,31 @@ table 50407 BookingTable
         {
             Caption = 'Status';
         }
+        field(8; PhoneNumber1; Text[30])
+        {
+            Caption = 'PhoneNumber';
+        }
+        field(9; Address; Text[100])
+        {
+            Caption = 'Address';
+        }
+        field(10; "Gen. Bus. Posting Group"; Code[20])
+        {
+            Caption = 'Gen. Bus. Posting Group';
+            TableRelation = "Gen. Business Posting Group";
+        }
+        field(11; "VAT Bus. Posting Group"; Code[20])
+        {
+            Caption = 'VAT Bus. Posting Group';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Gen. Business Posting Group"."Def. VAT Bus. Posting Group" where(Code = field("Gen. Bus. Posting Group")));
+            Editable = false;
+        }
+        field(12; "Customer Posting Group"; Code[20])
+        {
+            Caption = 'Customer Posting Group';
+            TableRelation = "Customer Posting Group";
+        }
     }
     keys
     {

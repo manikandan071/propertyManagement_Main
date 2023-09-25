@@ -37,13 +37,30 @@ page 50310 BookingCardPage
                 {
                     ToolTip = 'Specifies the value of the Customer Name field.';
                 }
+                field(Address; Rec.Address)
+                {
+                    ToolTip = 'Specifies the value of the Customer Address.';
+                }
                 field(Email; Rec.Email)
                 {
                     ToolTip = 'Specifies the value of the Email field.';
                 }
-                field(PhoneNumber; Rec.PhoneNumber)
+                field(PhoneNumber; Rec.PhoneNumber1)
                 {
                     ToolTip = 'Specifies the value of the PhoneNumber field.';
+                    Caption = 'Phone Number';
+                }
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
+                {
+                    Caption = 'Gen. Bus. Posting Group';
+                }
+                field("VAT Bus. Posting Group"; Rec."VAT Bus. Posting Group")
+                {
+                    Caption = 'VAT Bus. Posting Group';
+                }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    Caption = 'Customer Posting Group';
                 }
             }
         }
@@ -159,6 +176,7 @@ page 50310 BookingCardPage
                     trigger OnAction()
                     var
                         PropertyList: Record "Property Table1";
+                        Customer: Record Customer;
                     begin
                         ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
                         if Rec.PropertyNo <> '' then begin
@@ -171,6 +189,18 @@ page 50310 BookingCardPage
                                 PropertyList.Modify();
                                 Message('Property No %1 Booked', PropertyList."Property No");
                             end;
+                            Customer.Init();
+                            Customer.Reset();
+                            Customer."Customer Type" := Customer."Customer Type"::Tenant;
+                            Customer.Name := Rec."Customer Name";
+                            Customer."E-Mail" := Rec.Email;
+                            Customer."Mobile Phone No." := Rec.PhoneNumber1;
+                            Customer.Address := Rec.Address;
+                            Customer."Customer Posting Group" := Rec."Customer Posting Group";
+                            Customer."Gen. Bus. Posting Group" := Rec."Gen. Bus. Posting Group";
+                            Customer."VAT Bus. Posting Group" := Rec."VAT Bus. Posting Group";
+                            Customer.Insert(true);
+                            Message('customer Added');
                         end;
                     end;
                 }
