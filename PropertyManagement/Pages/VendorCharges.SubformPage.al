@@ -9,15 +9,15 @@ page 50308 "Vendor Charges Subform"
         {
             repeater(Lines)
             {
-                field("Charge Line No."; Rec."Charge Line No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Document No."; Rec."Document No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies type of the Document No.';
-                }
+                // field("Charge Line No."; Rec."Charge Line No.")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Document No."; Rec."Document No.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies type of the Document No.';
+                // }
                 field(VendorNumber; Rec.VendorNumber)
                 {
                     ApplicationArea = All;

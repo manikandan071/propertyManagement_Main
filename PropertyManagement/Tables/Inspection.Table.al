@@ -48,6 +48,11 @@ table 50410 "Inspection Table"
         }
     }
 
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Inspection  No.", "Property No.", "Property Description", "Maintenance Description") { }
+    }
+
     var
         NoSeriesmgt: Codeunit NoSeriesManagement;
         InspectionNoSeries: Record "No Series Setup";
