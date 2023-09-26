@@ -20,6 +20,8 @@ table 50406 "Vendor Charges Lines"
         {
             DataClassification = ToBeClassified;
             Caption = 'Service Charge';
+            NotBlank = true;
+
         }
         field(4; "VendorNumber"; Code[20])
         {
@@ -35,6 +37,12 @@ table 50406 "Vendor Charges Lines"
         {
             Clustered = true;
         }
+    }
+
+
+    fieldgroups
+    {
+        fieldgroup(DropDown; VendorNumber, "Service Description", "Service Charge") { }
     }
 
     var
