@@ -15,19 +15,22 @@ page 50320 "Headline RC Property Manager"
 
                 field(FirstInsight; FirstInsightText)
                 {
-                    ApplicationArea = Basic, Suite;
+                    ApplicationArea = All;
+                    // DrillDown = true;
+                    // DrillDownPageId = "Approval Entries";
+
                     // NavigationPageId = BookingListPage;
                     trigger OnDrillDown();
                     var
                     begin
-                        OnDrillDownFirstInsight();
-                        Message('mani');
+                        Page.Run(658);
                     end;
 
                 }
                 field(SecondInsight; SecondInsightText)
                 {
                     ApplicationArea = Basic, Suite;
+                    DrillDownPageId = "Approval Entries";
                     trigger OnDrillDown();
                     var
                     begin
@@ -47,7 +50,7 @@ page 50320 "Headline RC Property Manager"
 
     trigger OnOpenPage()
     var
-        BookingList: Record BookingTable;
+        BookingList: Record "Approval Entry";
     begin
         RCHeadlinesPageCommon.HeadlineOnOpenPage(Page::PropertyManagementRoleCenter);
         HandleVisibility();
@@ -56,8 +59,8 @@ page 50320 "Headline RC Property Manager"
         BookingList.Reset();
         if BookingList.FindSet() then
             repeat
-                if BookingList.Status = BookingList.Status::Pending then begin
-                    FirstInsightText := 'Approval Pending No' + BookingList.BookingNo;
+                if BookingList.Status = BookingList.Status::Open then begin
+                    FirstInsightText := 'Approval Pending No' + BookingList."Document No.";
                 end;
             until BookingList.Next = 0;
         SecondInsightText := 'kalimuthu';

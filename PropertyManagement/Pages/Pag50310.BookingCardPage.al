@@ -25,6 +25,7 @@ page 50310 BookingCardPage
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.';
+                    Editable = false;
                 }
 
             }
