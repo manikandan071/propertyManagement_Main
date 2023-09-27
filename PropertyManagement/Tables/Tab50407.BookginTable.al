@@ -2,6 +2,8 @@ table 50407 BookingTable
 {
     Caption = 'BookingTable';
     DataClassification = ToBeClassified;
+    DrillDownPageId = BookingListPage;
+    LookupPageId = BookingListPage;
 
     fields
     {
