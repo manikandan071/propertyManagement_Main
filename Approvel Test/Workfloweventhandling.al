@@ -35,6 +35,7 @@ codeunit 50494 workfloweventhandling
     local procedure RunWorkFlowOnSendClaimForApproval(var Book: Record "Approval Table")
     begin
         WorkFlowManagement.HandleEvent(Runworkflowonsendclaimforapprovalcode, Book);
+
     end;
 
     procedure RunWorkFlowOncancelClaimForApprovalcode(): Code[128]

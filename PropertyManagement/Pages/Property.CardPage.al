@@ -48,6 +48,14 @@ page 50301 "Property Card Page"
                 }
             }
         }
+        area(FactBoxes)
+        {
+            part(PropertyPicture; "Property Picture")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Property No." = FIELD("Property No");
+            }
+        }
     }
 
     // actions

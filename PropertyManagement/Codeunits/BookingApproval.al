@@ -43,6 +43,7 @@ codeunit 50407 "Booking Workflow Mgmnt"
     local procedure RunWorkflowOnSendWorkflowForApproval(var RecRef: RecordRef)
     begin
         WorkflowMgt.HandleEvent(GetWorkflowCode(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef), RecRef);
+        SendApprovalEmail();
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Booking Workflow Mgmnt", 'OnCancelWorkflowForApproval', '', false, false)]
@@ -137,6 +138,20 @@ codeunit 50407 "Booking Workflow Mgmnt"
                     end;
                 end;
         end;
+    end;
+
+    procedure SendApprovalEmail()
+    var
+        SEmail: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+        HtmlContent: Text;
+        HTmlLink: Text;
+    begin
+        HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=17_4sQAAAJ7_0EATgAwADAAMAAx';
+        HtmlContent := '<h1>Please approve this test data</h1><a href=' + HTmlLink + '>Clik here</a>';
+        EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
+        SEmail.Send(EmailMessage);
+        Message('Mail sent successfully');
     end;
 
     var
