@@ -52,6 +52,11 @@ table 50400 "No Series Setup"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(10; "Gen. Jrnl No Series"; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
     }
 
     keys

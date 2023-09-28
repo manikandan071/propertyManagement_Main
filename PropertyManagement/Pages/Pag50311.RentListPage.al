@@ -22,7 +22,7 @@ page 50311 RentListPage
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
-                field(Amount; Rec.Amount)
+                field(RentAmount; Rec.RentAmount)
                 {
                     ToolTip = 'Specifies the value of the Amount field.';
                 }

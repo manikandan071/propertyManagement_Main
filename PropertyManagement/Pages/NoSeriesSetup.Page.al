@@ -56,6 +56,11 @@ page 50300 "No series Setup"
                     ApplicationArea = All;
                     Caption = 'Maintenance No Series';
                 }
+                field("Gen. Jrnl No Series"; Rec."Gen. Jrnl No Series")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Gen. Jrnl No Series';
+                }
 
             }
         }
