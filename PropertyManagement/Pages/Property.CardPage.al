@@ -47,6 +47,18 @@ page 50301 "Property Card Page"
                     Caption = 'Status';
                 }
             }
+            group(Tenant)
+            {
+                Caption = 'Tenant Details';
+                field("Tenant No"; Rec."Tenant No")
+                {
+                    Caption = 'Tenant No.';
+                }
+                field("Tenant detail"; Rec."Tenant detail")
+                {
+                    Caption = 'Tenant Name';
+                }
+            }
         }
         area(FactBoxes)
         {

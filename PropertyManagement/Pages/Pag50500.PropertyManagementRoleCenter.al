@@ -63,7 +63,7 @@ page 50500 PropertyManagementRoleCenter
             {
                 Caption = 'Customer Details';
                 Image = NewItem;
-                RunObject = Page "Customer List";
+                RunObject = codeunit "Tenant Customers";
                 RunPageMode = View;
             }
 

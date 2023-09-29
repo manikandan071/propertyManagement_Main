@@ -43,7 +43,7 @@ codeunit 50407 "Booking Workflow Mgmnt"
     local procedure RunWorkflowOnSendWorkflowForApproval(var RecRef: RecordRef)
     begin
         WorkflowMgt.HandleEvent(GetWorkflowCode(RUNWORKFLOWONSENDFORAPPROVALCODE, RecRef), RecRef);
-        SendApprovalEmail();
+        SendApprovalEmail(RecRef);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Booking Workflow Mgmnt", 'OnCancelWorkflowForApproval', '', false, false)]
@@ -140,7 +140,7 @@ codeunit 50407 "Booking Workflow Mgmnt"
         end;
     end;
 
-    procedure SendApprovalEmail()
+    procedure SendApprovalEmail(var RecRef: RecordRef)
     var
         SEmail: Codeunit Email;
         EmailMessage: Codeunit "Email Message";

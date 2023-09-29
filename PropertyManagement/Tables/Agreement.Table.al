@@ -36,10 +36,12 @@ table 50402 "Agreement Table"
             CalcFormula = lookup("Property Table1"."Deposit Amount" where("Property No" = field("Property No.")));
             Editable = false;
         }
-        field(7; "Customer No."; Code[20])
+        field(7; "Customer No."; Code[30])
         {
-            DataClassification = ToBeClassified;
-            TableRelation = Customer where("Customer Type" = const("Tenant"));
+            FieldClass = FlowField;
+            // TableRelation = Customer where("Customer Type" = const("Tenant"));
+            CalcFormula = lookup("Property Table1"."Tenant No" where("Property No" = field("Property No.")));
+            Editable = false;
         }
         field(8; "Customer Name"; Code[100])
         {

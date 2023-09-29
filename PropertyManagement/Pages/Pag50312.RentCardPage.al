@@ -46,11 +46,13 @@ page 50312 RentCardPage
                 field(Ispayment; Rec.Ispayment)
                 {
                     ToolTip = 'Specifies the Payment Checking';
+                    Editable = false;
                 }
 
                 field("Date Of Paid"; Rec."Date Of Paid")
                 {
                     ToolTip = 'Specifies the value of the Date Of Paid field.';
+                    Editable = false;
                 }
             }
         }
@@ -109,7 +111,9 @@ page 50312 RentCardPage
                             else
                                 Message('Already Posted');
                         end;
-                    end;
+                    end
+                    else
+                        Message('Enter Invoice No.');
                 end;
             }
         }
@@ -123,4 +127,38 @@ page 50312 RentCardPage
         else begin
         end;
     end;
+
+
+    local procedure PostGenJnlforRent()
+    var
+        GLPost: Codeunit "Gen. Jnl.-Post Line";
+        Line: Record "Gen. Journal Line";
+        GenJnlBatch: Record "Gen. Journal Batch";
+        NoSeriesMgt: Codeunit NoSeriesManagement;
+    begin
+
+        if not Rec.Ispayment then begin
+            Line.Init();
+            Line."Posting Date" := Today();
+            Line."Document Type" := Line."Document Type"::Payment;
+            Line."Document No." := Rec."Gen. Jrnl Document no";
+            Line."Account Type" := Line."Account Type"::"G/L Account";
+            Line."Account No." := '9511';
+            //Line."Applies-to Doc. Type" := Line."Applies-to Doc. Type"::Invoice;
+            //Line."Applies-to Doc. No." := Rec."Invoice No";
+            Line."Bal. Account Type" := Line."Bal. Account Type"::"Bank Account";
+            Line."Bal. Account No." := 'Savings';
+            Line.Description := 'My Payment Journals';
+            Line.Amount := -1 * Rec.RentAmount;
+            Line.Validate("Shortcut Dimension 1 Code", 'Sales');
+            GLPost.RunWithCheck(Line);
+            // OrderLines.Get(OrderLines."Line No.");
+            Rec.Ispayment := true;
+            Rec."Date Of Paid" := Today;
+            // rec.Status := true;
+            Rec.Modify();
+        end
+
+    end;
+
 }

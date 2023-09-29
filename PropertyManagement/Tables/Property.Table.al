@@ -22,11 +22,6 @@ table 50403 "Property Table1"
         {
             DataClassification = ToBeClassified;
         }
-        field(5; "Tenant detail"; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Editable = false;
-        }
         field(6; "Deposit Amount"; Decimal)
         {
             DataClassification = ToBeClassified;
@@ -39,7 +34,18 @@ table 50403 "Property Table1"
         {
             DataClassification = ToBeClassified;
             OptionMembers = "Available","Booked","Agreement Signed";
-            //Editable = false;
+            Editable = false;
+        }
+        field(5; "Tenant detail"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(9; "Tenant No"; code[30])
+        {
+            FieldClass = FlowField;
+            CalcFormula = lookup(Customer."No." where(Name = field("Tenant detail")));
+            Editable = false;
         }
     }
 

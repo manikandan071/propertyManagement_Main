@@ -13,7 +13,7 @@ table 50408 RentTable
         field(2; PropertyNo; Code[20])
         {
             Caption = 'PropertyNo';
-            TableRelation = "Property Table1";
+            TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
         }
         field(3; Amount; Integer)
         {
