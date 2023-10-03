@@ -2,7 +2,8 @@ table 50408 RentTable
 {
     Caption = 'RentTable';
     DataClassification = ToBeClassified;
-
+    DrillDownPageId = RentListPage;
+    LookupPageId = RentListPage;
     fields
     {
         field(1; RentNo; Code[20])
@@ -13,7 +14,8 @@ table 50408 RentTable
         field(2; PropertyNo; Code[20])
         {
             Caption = 'PropertyNo';
-            TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
+            // TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
+            TableRelation = "Property Table1";
         }
         field(3; Amount; Integer)
         {
@@ -26,9 +28,16 @@ table 50408 RentTable
         field(5; RentAmount; Decimal)
         {
             Caption = 'Rent Amount';
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
             Editable = false;
+        }
+        field(11; PayRentAmount; Decimal)
+        {
+            Caption = 'Pay Rent Amount';
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
+            // Editable = false;
         }
         field(6; "Tenant detail"; Text[100])
         {
@@ -52,11 +61,13 @@ table 50408 RentTable
         field(9; "Invoice No"; code[30])
         {
             Caption = 'Invoice No';
+            TableRelation = "Sales Invoice Header" where("Bill-to Customer No." = FIELD("Tenant No."));
+            // TableRelation = if (type = const(RentTable))"Sales Invoice Header" where("Bill-to Customer No." = field("Tenant No.")) else if (type = const(Customer))"Sales Invoice Header" where(Closed = filter('No'));
         }
         field(10; Ispayment; Boolean)
         {
             Caption = 'Payment';
-            // Editable= false;
+            Editable = false;
         }
     }
     keys
@@ -82,6 +93,12 @@ table 50408 RentTable
         NoSeriesMgt.InitSeries(RentSeries."Rent No Series", RentSeries."Rent No Series", 0D, RentNo, RentSeries."Rent No Series");
         IF "Gen. Jrnl Document no" = '' then
             NoSeriesMgt.InitSeries(RentSeries."Gen. Jrnl No Series", RentSeries."Gen. Jrnl No Series", 0D, "Gen. Jrnl Document no", RentSeries."Gen. Jrnl No Series");
+    end;
+
+    trigger OnModify()
+    var
+        property: Record "Property Table1";
+    begin
     end;
 
 }

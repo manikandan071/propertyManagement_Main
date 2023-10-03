@@ -41,10 +41,9 @@ table 50403 "Property Table1"
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(9; "Tenant No"; code[30])
+        field(9; "Tenant No"; code[20])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer."No." where(Name = field("Tenant detail")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
     }

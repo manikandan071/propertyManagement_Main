@@ -181,15 +181,6 @@ page 50310 BookingCardPage
                     begin
                         ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
                         if Rec.PropertyNo <> '' then begin
-                            PropertyList.Init();
-                            PropertyList.Reset();
-                            PropertyList.SetFilter(PropertyList."Property No", Rec.PropertyNo);
-                            if PropertyList.FindSet() then begin
-                                PropertyList."Tenant detail" := Rec."Customer Name";
-                                PropertyList.Status := PropertyList.Status::Booked;
-                                PropertyList.Modify();
-                                Message('Property No %1 Booked', PropertyList."Property No");
-                            end;
                             Customer.Init();
                             Customer.Reset();
                             Customer."Customer Type" := Customer."Customer Type"::Tenant;
@@ -201,7 +192,18 @@ page 50310 BookingCardPage
                             Customer."Gen. Bus. Posting Group" := Rec."Gen. Bus. Posting Group";
                             Customer."VAT Bus. Posting Group" := Rec."VAT Bus. Posting Group";
                             Customer.Insert(true);
-                            Message('customer Added');
+                            Customer.FindLast();
+                            Message('%1, %2', Customer."No.", Customer.Name);
+                            PropertyList.Init();
+                            PropertyList.Reset();
+                            PropertyList.SetFilter(PropertyList."Property No", Rec.PropertyNo);
+                            if PropertyList.FindSet() then begin
+                                PropertyList."Tenant No" := Customer."No.";
+                                PropertyList."Tenant detail" := Customer.Name;
+                                PropertyList.Status := PropertyList.Status::Booked;
+                                PropertyList.Modify();
+                                Message('Property No %1 Booked', PropertyList."Property No");
+                            end;
                         end;
                     end;
                 }
@@ -266,9 +268,14 @@ page 50310 BookingCardPage
                     end;
                 }
             }
+
         }
 
     }
+    trigger OnOpenPage()
+    begin
+        if Rec.Status = Rec.Status::Approved then CurrPage.Editable(false);
+    end;
 
     trigger OnAfterGetCurrRecord()
     begin

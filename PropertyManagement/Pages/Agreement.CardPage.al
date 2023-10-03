@@ -23,6 +23,29 @@ page 50304 "Agreement Card Page"
                     Caption = 'Agreement Sign Completed';
                 }
             }
+            group(Property)
+            {
+                field("Property No."; Rec."Property No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Property No.';
+                }
+                field("Property Description"; Rec."Property Description")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Property Description';
+                }
+                field("Property Owner"; Rec."Property Owner")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Property Owner';
+                }
+                field("Property Deposit Amount"; Rec."Property Deposit Amount")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Property Deposit Amount';
+                }
+            }
             group(Customer)
             {
                 field("Customer No."; Rec."Customer No.")
@@ -51,29 +74,6 @@ page 50304 "Agreement Card Page"
                     Caption = 'Customer Mail';
                 }
             }
-            group(Property)
-            {
-                field("Property No."; Rec."Property No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Property No.';
-                }
-                field("Property Description"; Rec."Property Description")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Property Description';
-                }
-                field("Property Owner"; Rec."Property Owner")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Property Owner';
-                }
-                field("Property Deposit Amount"; Rec."Property Deposit Amount")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Property Deposit Amount';
-                }
-            }
         }
     }
 
@@ -81,26 +81,26 @@ page 50304 "Agreement Card Page"
     {
         area(Processing)
         {
-            action(Submit)
-            {
-                ApplicationArea = All;
+            // action(Submit)
+            // {
+            //     ApplicationArea = All;
 
-                trigger OnAction()
-                var
-                    PropertyList: Record "Property Table1";
-                begin
-                    Rec."Agreement Sign" := true;
-                    PropertyList.Init();
-                    PropertyList.Reset();
-                    PropertyList.SetFilter(PropertyList."Property No", Rec."Property No.");
-                    if PropertyList.FindSet() then begin
-                        PropertyList."Tenant detail" := Rec."Customer No.";
-                        PropertyList.Status := PropertyList.Status::"Agreement Signed";
-                        PropertyList.Modify();
-                        Message('Property No. %1', PropertyList."Property No");
-                    end;
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         PropertyList: Record "Property Table1";
+            //     begin
+            //         Rec."Agreement Sign" := true;
+            //         PropertyList.Init();
+            //         PropertyList.Reset();
+            //         PropertyList.SetFilter(PropertyList."Property No", Rec."Property No.");
+            //         if PropertyList.FindSet() then begin
+            //             PropertyList."Tenant detail" := Rec."Customer No.";
+            //             PropertyList.Status := PropertyList.Status::"Agreement Signed";
+            //             PropertyList.Modify();
+            //             Message('Property No. %1', PropertyList."Property No");
+            //         end;
+            //     end;
+            // }
 
             // action(Testing)
             // {
@@ -132,34 +132,38 @@ page 50304 "Agreement Card Page"
             //     end;
             // }
 
-            action(SendEmail)
-            {
-                ApplicationArea = All;
+            // action(SendEmail)
+            // {
+            //     ApplicationArea = All;
 
-                trigger OnAction()
-                var
-                    SEmail: Codeunit Email;
-                    EmailMessage: Codeunit "Email Message";
-                    HtmlContent: Text;
-                    HTmlLink: Text;
-                begin
+            //     trigger OnAction()
+            //     var
+            //         SEmail: Codeunit Email;
+            //         EmailMessage: Codeunit "Email Message";
+            //         HtmlContent: Text;
+            //         HTmlLink: Text;
+            //     begin
 
-                    // Message('https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=%1', Rec.RecordId);
-                    HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=17_4sQAAAJ7_0EATgAwADAAMAAx';
-                    HtmlContent := '<h1>Please approve this test data</h1><a href=' + HTmlLink + '>Clik here</a>';
-                    EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
-                    SEmail.Send(EmailMessage);
-                    Message('Mail sent successfully');
-                end;
-            }
+            //         // Message('https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=%1', Rec.RecordId);
+            //         HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=17_4sQAAAJ7_0EATgAwADAAMAAx';
+            //         HtmlContent := '<h1>Please approve this test data</h1><a href=' + HTmlLink + '>Clik here</a>';
+            //         EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
+            //         SEmail.Send(EmailMessage);
+            //         Message('Agreement Assigned successfully');
+            //     end;
+            // }
 
-            action(Approve)
+            action(Submit)
             {
                 ApplicationArea = All;
                 Visible = isAdmin;
                 trigger OnAction()
                 var
                     PropertyDetails: Record "Property Table1";
+                    SEmail: Codeunit Email;
+                    EmailMessage: Codeunit "Email Message";
+                    HtmlContent: Text;
+                    HTmlLink: Text;
                 begin
                     PropertyDetails.Init();
                     PropertyDetails.Reset();
@@ -167,7 +171,13 @@ page 50304 "Agreement Card Page"
                     if PropertyDetails.FindFirst() then begin
                         PropertyDetails.Status := PropertyDetails.Status::"Agreement Signed";
                         PropertyDetails.Modify();
-                        Message('Approved');
+                        HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50304&dc=0&bookmark=17_4sQAAAJ7_0EATgAwADAAMAAx';
+                        HtmlContent := '<h1>Please approve this test data</h1><a href=' + HTmlLink + '>Clik here</a>';
+                        EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
+                        SEmail.Send(EmailMessage);
+                        Message('Agreement Assigned successfully');
+                        Rec."Agreement Sign" := true;
+                        Rec.Modify();
                     end;
                 end;
             }
@@ -192,6 +202,7 @@ page 50304 "Agreement Card Page"
                 isAdmin := true;
             end;
         end;
+        if Rec."Agreement Sign" then CurrPage.Editable(false);
     end;
 
     var

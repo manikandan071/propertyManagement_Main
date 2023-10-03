@@ -36,10 +36,9 @@ table 50402 "Agreement Table"
             CalcFormula = lookup("Property Table1"."Deposit Amount" where("Property No" = field("Property No.")));
             Editable = false;
         }
-        field(7; "Customer No."; Code[30])
+        field(7; "Customer No."; Code[20])
         {
             FieldClass = FlowField;
-            // TableRelation = Customer where("Customer Type" = const("Tenant"));
             CalcFormula = lookup("Property Table1"."Tenant No" where("Property No" = field("Property No.")));
             Editable = false;
         }
@@ -58,7 +57,7 @@ table 50402 "Agreement Table"
         field(10; "Customer Phone"; Code[100])
         {
             FieldClass = FlowField;
-            CalcFormula = lookup(Customer."Phone No." where("No." = field("Customer No.")));
+            CalcFormula = lookup(Customer."Mobile Phone No." where("No." = field("Customer No.")));
             Editable = false;
         }
         field(11; "Customer City"; Code[100])

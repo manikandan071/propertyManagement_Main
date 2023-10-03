@@ -88,4 +88,9 @@ page 50301 "Property Card Page"
 
     var
         myInt: Integer;
+
+    trigger OnOpenPage()
+    begin
+        if Rec.Status = rec.Status::"Agreement Signed" then CurrPage.Editable(false);
+    end;
 }
