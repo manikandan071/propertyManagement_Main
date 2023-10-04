@@ -87,7 +87,7 @@ page 50314 TenantExitCardPage
                         // Line."Applies-to Doc. No." := Rec."Invoice No";
                         Line."Bal. Account Type" := Line."Bal. Account Type"::"Bank Account";
                         Line."Bal. Account No." := 'B030';
-                        Line.Description := 'For ' + Rec."Tenant Name" + ' Deposit Return Amount';
+                        Line.Description := 'For ' + Rec."Tenant Name" + ' Deposit Amount returned';
                         Line.Amount := 1 * Rec."Deposit Amount";
                         Line.Validate("Shortcut Dimension 1 Code", 'Sales');
                         GLPost.RunWithCheck(Line);

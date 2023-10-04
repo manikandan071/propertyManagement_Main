@@ -7,7 +7,7 @@ table 50409 TenantExitTable
     {
         field(1; ExitNo; Code[20])
         {
-            Caption = 'ExitNo';
+            Caption = 'Document No';
         }
         field(2; Status; Boolean)
         {
