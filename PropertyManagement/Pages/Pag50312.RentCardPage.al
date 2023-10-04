@@ -41,6 +41,7 @@ page 50312 RentCardPage
                 field("Invoice No"; Rec."Invoice No")
                 {
                     ToolTip = 'Specifies the Invoice No.';
+                    Editable = InvoiceDrpWn;
                 }
                 field(Ispayment; Rec.Ispayment)
                 {
@@ -90,30 +91,7 @@ page 50312 RentCardPage
                         CusledgerEntry.Init();
                         CusledgerEntry.SetFilter("Document No.", Rec."Invoice No");
                         if CusledgerEntry.FindSet() then begin
-                            // CusledgerEntry."Applies-to ID" := OrderLines."Gen. Jrnl Document no";
-                            // Message('Cus ledger Entry %1,%2,%3,%4,%5', CusledgerEntry."Document Type", CusledgerEntry."Document No.", CusledgerEntry."Customer No.", CusledgerEntry."Sales (LCY)");
-
                             if not Rec.Ispayment then begin
-                                // Message('this is order lines %1,%2,%3,%4', Rec."Gen. Jrnl Document no", Rec.RentAmount, Rec."Tenant No.", Rec."Invoice No");
-                                // Line.Init();
-                                // Line."Posting Date" := Today();
-                                // Line."Document Type" := Line."Document Type"::Payment;
-                                // Line."Document No." := Rec."Gen. Jrnl Document no";
-                                // Line."Account Type" := Line."Account Type"::Customer;
-                                // Line."Account No." := Rec."Tenant No.";
-                                // Line."Applies-to Doc. Type" := Line."Applies-to Doc. Type"::Invoice;
-                                // Line."Applies-to Doc. No." := Rec."Invoice No";
-                                // Line."Bal. Account Type" := Line."Bal. Account Type"::"Bank Account";
-                                // Line."Bal. Account No." := 'Savings';
-                                // Line.Description := 'My Payment Journals';
-                                // Line.Amount := -1 * Rec.RentAmount;
-                                // Line.Validate("Shortcut Dimension 1 Code", 'Sales');
-                                // GLPost.RunWithCheck(Line);
-                                // OrderLines.Get(OrderLines."Line No.");
-                                // Rec.Ispayment := true;
-                                // Rec."Date Of Paid" := Today;
-                                // rec.Status := true;
-                                // Rec.Modify();
                                 RentLine.Init();
                                 RentLine.SetFilter("Rent No.", Rec.RentNo);
                                 if RentLine.FindSet() then begin
@@ -121,7 +99,7 @@ page 50312 RentCardPage
                                         PaidAmount := PaidAmount + RentLine."Paid Amount";
                                     until RentLine.Next() = 0;
                                     if Rec.RentAmount >= (PaidAmount + Rec.PayRentAmount) then begin
-                                        Message('Ok');
+
                                         Line.Init();
                                         Line."Posting Date" := Today();
                                         Line."Document Type" := Line."Document Type"::Payment;
@@ -136,6 +114,8 @@ page 50312 RentCardPage
                                         Line.Amount := -1 * Rec.PayRentAmount;
                                         Line.Validate("Shortcut Dimension 1 Code", 'Sales');
                                         GLPost.RunWithCheck(Line);
+
+
                                         RentLine.Init();
                                         RentLine.Reset();
                                         RentLine."Rent No." := Rec.RentNo;
@@ -146,7 +126,7 @@ page 50312 RentCardPage
                                         Rec.PayRentAmount := Rec.RentAmount - (PaidAmount + Rec.PayRentAmount);
                                         Rec."Date Of Paid" := Today;
                                         Rec.Modify();
-                                        Message('Rent Paied');
+                                        Message('Rent Paid');
                                         if Rec.PayRentAmount = 0 then begin
                                             Rec.Ispayment := true;
                                             Rec.Modify();
@@ -181,7 +161,7 @@ page 50312 RentCardPage
                                         Rec.PayRentAmount := Rec.RentAmount - Rec.PayRentAmount;
                                         Rec."Date Of Paid" := Today;
                                         Rec.Modify();
-                                        Message(('Rent Paied'));
+                                        Message(('Rent Paid'));
                                         if Rec.PayRentAmount = 0 then begin
                                             Rec.Ispayment := true;
                                             Rec.Modify();
@@ -205,12 +185,13 @@ page 50312 RentCardPage
     var
         RentLine: Record "Rent Lines";
     begin
+        InvoiceDrpWn := true;
         if Rec.Ispayment = true then
             CurrPage.Editable(false);
         RentLine.Init();
         RentLine.SetFilter("Rent No.", Rec.RentNo);
         if RentLine.FindSet() then begin
-
+            InvoiceDrpWn := false;
         end
         else begin
             Rec.PayRentAmount := Rec.RentAmount;
@@ -250,5 +231,8 @@ page 50312 RentCardPage
         end
 
     end;
+
+    var
+        InvoiceDrpWn: Boolean;
 
 }
