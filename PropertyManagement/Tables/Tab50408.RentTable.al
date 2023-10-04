@@ -15,7 +15,7 @@ table 50408 RentTable
         {
             Caption = 'PropertyNo';
             // TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
-            TableRelation = "Property Table1";
+            TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
         }
         field(3; Amount; Integer)
         {
@@ -28,8 +28,8 @@ table 50408 RentTable
         field(5; RentAmount; Decimal)
         {
             Caption = 'Rent Amount';
-            // FieldClass = FlowField;
-            // CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
+            FieldClass = FlowField;
+            CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
             Editable = false;
         }
         field(11; PayRentAmount; Decimal)

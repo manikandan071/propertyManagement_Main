@@ -15,7 +15,7 @@ table 50407 BookingTable
         field(2; PropertyNo; Code[20])
         {
             Caption = 'PropertyNo';
-            TableRelation = "Property Table1" where(Status = filter('Available'));
+            TableRelation = "Property Table1" where(Status = filter(Available));
         }
         field(3; "Customer Name"; Text[100])
         {

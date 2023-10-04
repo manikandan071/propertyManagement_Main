@@ -30,6 +30,10 @@ page 50311 RentListPage
                 {
                     ToolTip = 'Specifies the value of the Date Of Paid field.';
                 }
+                field(Ispayment; Rec.Ispayment)
+                {
+                    ToolTip = 'Specifies the value of the Date Of Paid field.';
+                }
             }
         }
     }

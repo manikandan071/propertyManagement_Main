@@ -153,7 +153,8 @@ page 50312 RentCardPage
                                         end;
                                     end
                                     else
-                                        Message('This payment amount greater than orignal rent amount');
+                                        // Message('This payment amount greater than orignal rent amount');
+                                        Error('This payment amount greater than orignal rent amount');
                                 end
                                 else begin
                                     if Rec.RentAmount >= Rec.PayRentAmount then begin
@@ -187,11 +188,11 @@ page 50312 RentCardPage
                                         end;
                                     end
                                     else
-                                        Message('This payment amount greater than orignal rent amount');
+                                        Error('This payment amount greater than orignal rent amount');
                                 end;
                             end
                             else
-                                Message('Already Posted');
+                                Error('Already Posted');
                         end;
                     end
                     else
@@ -214,7 +215,6 @@ page 50312 RentCardPage
         else begin
             Rec.PayRentAmount := Rec.RentAmount;
             Rec.Modify(true);
-            Message('err');
         end;
     end;
 

@@ -57,7 +57,7 @@ table 50403 "Property Table1"
     }
     fieldgroups
     {
-        fieldgroup(DropDown; "Property No", "Property Description", "Property Owner", "Deposit Amount", "Rent Amount")
+        fieldgroup(DropDown; "Property No", "Property Description", "Property Owner", "Deposit Amount", "Rent Amount", "Tenant detail")
         {
 
         }

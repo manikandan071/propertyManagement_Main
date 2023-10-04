@@ -16,7 +16,9 @@ table 50402 "Agreement Table"
         field(3; "Property No."; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Property Table1";
+            // TableRelation = "Property Table1";
+            TableRelation = "Property Table1" where(Status = filter(Booked));
+
         }
         field(4; "Property Description"; Code[30])
         {
