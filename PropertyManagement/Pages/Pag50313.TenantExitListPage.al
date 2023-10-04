@@ -21,7 +21,11 @@ page 50313 TenantExitListPage
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
-                field(TenantName; Rec.TenantName)
+                field(TenantNo; Rec."Tenant No")
+                {
+
+                }
+                field(TenantName; Rec."Tenant Name")
                 {
 
                 }

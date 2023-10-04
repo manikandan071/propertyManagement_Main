@@ -79,7 +79,6 @@ page 50312 RentCardPage
                 var
                     GLPost: Codeunit "Gen. Jnl.-Post Line";
                     Line: Record "Gen. Journal Line";
-                    // OrderLines: Record "Order Line Table";
                     GenJnlBatch: Record "Gen. Journal Batch";
                     NoSeriesMgt: Codeunit NoSeriesManagement;
                     CusledgerEntry: Record "Cust. Ledger Entry";

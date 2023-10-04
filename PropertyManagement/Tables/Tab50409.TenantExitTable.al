@@ -9,27 +9,44 @@ table 50409 TenantExitTable
         {
             Caption = 'ExitNo';
         }
-        field(2; PropertyNo; Code[20])
+        field(2; Status; Boolean)
+        {
+            Caption = 'Status';
+            Editable = false;
+        }
+        field(3; PropertyNo; Code[20])
         {
             Caption = 'PropertyNo';
-            TableRelation = "Property Table1";
+            TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
         }
-        field(3; TenantName; Code[100])
+        field(4; "Tenant Name"; Code[100])
         {
-            Caption = 'TenantName';
+            Caption = 'Tenant Name';
             FieldClass = FlowField;
             CalcFormula = lookup("Property Table1"."Tenant detail" where("Property No" = field(PropertyNo)));
         }
-        field(4; Status; Option)
+        field(5; "Tenant No"; Code[20])
         {
-            Caption = 'Status';
-            OptionMembers = "Booked","Exited";
-        }
-        field(5; TenantDetails; Code[100])
-        {
-            Caption = 'Tenant Details';
+            Caption = 'Tenant No';
             FieldClass = FlowField;
-            CalcFormula = lookup("Agreement Table"."Customer No." where("Property No." = field(PropertyNo)));
+            CalcFormula = lookup("Property Table1"."Tenant No" where("Property No" = field(PropertyNo)));
+        }
+        field(6; "Deposit Amount"; Decimal)
+        {
+            Caption = 'Deposit Amount';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Property Table1"."Deposit Amount" where("Property No" = field(PropertyNo)));
+        }
+        field(7; "Property Description"; code[30])
+        {
+            Caption = 'Deposit Amount';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Property Table1"."Property Description" where("Property No" = field(PropertyNo)));
+        }
+        field(14; "Gen. Jrnl Document no"; code[20])
+        {
+            Caption = 'Gen. Jrnl Document no';
+            Editable = false;
         }
     }
     keys
@@ -52,6 +69,6 @@ table 50409 TenantExitTable
         ExitSeries.Get();
         ExitSeries.TestField("Exit No Series");
         NoSeriesMgt.InitSeries(ExitSeries."Exit No Series", ExitSeries."Exit No Series", 0D, ExitNo, ExitSeries."Exit No Series");
-
+        NoSeriesMgt.InitSeries(ExitSeries."Gen. Jrnl No Series", ExitSeries."Gen. Jrnl No Series", 0D, "Gen. Jrnl Document no", ExitSeries."Gen. Jrnl No Series");
     end;
 }

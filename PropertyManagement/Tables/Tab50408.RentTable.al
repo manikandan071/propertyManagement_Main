@@ -61,7 +61,7 @@ table 50408 RentTable
         field(9; "Invoice No"; code[30])
         {
             Caption = 'Invoice No';
-            TableRelation = "Sales Invoice Header" where("Bill-to Customer No." = FIELD("Tenant No."));
+            TableRelation = "Sales Invoice Header" where("Bill-to Customer No." = FIELD("Tenant No."), Closed = filter('No'));
             // TableRelation = if (type = const(RentTable))"Sales Invoice Header" where("Bill-to Customer No." = field("Tenant No.")) else if (type = const(Customer))"Sales Invoice Header" where(Closed = filter('No'));
         }
         field(10; Ispayment; Boolean)

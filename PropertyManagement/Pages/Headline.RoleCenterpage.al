@@ -69,6 +69,16 @@ page 50320 "Headline RC Property Manager"
         // HandleSecondInsight();
 
         OnSetVisibility(AppNameHeadlineVisible);
+
+        UserPermission.SetRange("User Security ID", UserSecurityId());
+
+        UserPermission.SetFilter("Role ID", 'TESTSET');
+
+        if UserPermission.IsEmpty() then begin
+
+            Error('You are not a part of admin..');
+
+        end;
     end;
 
     local procedure HandleVisibility()
@@ -121,4 +131,5 @@ page 50320 "Headline RC Property Manager"
 
     var
         RCHeadlinesPageCommon: Codeunit "RC Headlines Page Common";
+        UserPermission: Record "Access Control";
 }

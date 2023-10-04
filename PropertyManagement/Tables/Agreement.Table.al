@@ -79,6 +79,11 @@ table 50402 "Agreement Table"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(14; "Gen. Jrnl Document no"; code[20])
+        {
+            Caption = 'Gen. Jrnl Document no';
+            Editable = false;
+        }
     }
 
     keys
@@ -92,17 +97,14 @@ table 50402 "Agreement Table"
     var
         myInt: Integer;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        "Properties No Series": Record "No Series Setup";
+        RentSeries: Record "No Series Setup";
 
     trigger OnInsert()
     begin
-        "Properties No Series".Init();
-        if "Properties No Series".FindSet() then
-            repeat
-                Message('Property No %1', "Properties No Series"."Agreement No Series");
-                IF "Agreement No." = '' then
-                    NoSeriesMgt.InitSeries("Properties No Series"."Agreement No Series", "Properties No Series"."Agreement No Series", 0D, "Agreement No.", "Properties No Series"."Agreement No Series");
-            until "Properties No Series".Next() = 0;
+        RentSeries.Get();
+        RentSeries.TestField("Agreement No Series");
+        NoSeriesMgt.InitSeries(RentSeries."Agreement No Series", RentSeries."Agreement No Series", 0D, "Agreement No.", RentSeries."Agreement No Series");
+        NoSeriesMgt.InitSeries(RentSeries."Gen. Jrnl No Series", RentSeries."Gen. Jrnl No Series", 0D, "Gen. Jrnl Document no", RentSeries."Gen. Jrnl No Series");
     end;
 
     trigger OnModify()
