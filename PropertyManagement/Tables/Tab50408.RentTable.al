@@ -8,32 +8,44 @@ table 50408 RentTable
     {
         field(1; RentNo; Code[20])
         {
+            DataClassification = ToBeClassified;
             Caption = 'RentNo';
             Editable = false;
         }
         field(2; PropertyNo; Code[20])
         {
+            DataClassification = ToBeClassified;
             Caption = 'PropertyNo';
             // TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
             TableRelation = "Property Table1" where(Status = filter("Agreement Signed"));
+            trigger OnValidate()
+            var
+                properties: Record "Property Table1";
+            begin
+                properties.SetFilter("Property No", Rec.PropertyNo);
+                if properties.FindSet() then begin
+                    Rec.RentAmount := properties."Rent Amount";
+                    Rec."Tenant No." := properties."Tenant No";
+                    Rec."Tenant detail" := properties."Tenant detail";
+                end;
+            end;
         }
-        field(3; Amount; Integer)
+        field(3; "Date Of Paid"; Date)
         {
-            Caption = 'Amount';
-        }
-        field(4; "Date Of Paid"; Date)
-        {
+            DataClassification = ToBeClassified;
             Caption = 'Date Of Paid';
         }
-        field(5; RentAmount; Decimal)
+        field(4; RentAmount; Decimal)
         {
+            DataClassification = ToBeClassified;
             Caption = 'Rent Amount';
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
             Editable = false;
         }
-        field(11; PayRentAmount; Decimal)
+        field(5; PayRentAmount; Decimal)
         {
+            DataClassification = ToBeClassified;
             Caption = 'Pay Rent Amount';
             // FieldClass = FlowField;
             // CalcFormula = lookup("Property Table1"."Rent Amount" where("Property No" = field(PropertyNo)));
@@ -41,31 +53,36 @@ table 50408 RentTable
         }
         field(6; "Tenant detail"; Text[100])
         {
+            DataClassification = ToBeClassified;
             Caption = 'Tenant Details';
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Tenant detail" where("Property No" = field(PropertyNo)));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Tenant detail" where("Property No" = field(PropertyNo)));
             Editable = false;
         }
         field(7; "Tenant No."; code[20])
         {
+            DataClassification = ToBeClassified;
             Caption = 'Tenant No.';
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer."No." where(Name = field("Tenant detail")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer."No." where(Name = field("Tenant detail")));
             Editable = false;
         }
         field(8; "Gen. Jrnl Document no"; code[20])
         {
+            DataClassification = ToBeClassified;
             Caption = 'Gen. Jrnl Document no';
             Editable = false;
         }
         field(9; "Invoice No"; code[30])
         {
+            DataClassification = ToBeClassified;
             Caption = 'Invoice No';
             TableRelation = "Sales Invoice Header" where("Bill-to Customer No." = FIELD("Tenant No."), Closed = filter('No'));
             // TableRelation = if (type = const(RentTable))"Sales Invoice Header" where("Bill-to Customer No." = field("Tenant No.")) else if (type = const(Customer))"Sales Invoice Header" where(Closed = filter('No'));
         }
         field(10; Ispayment; Boolean)
         {
+            DataClassification = ToBeClassified;
             Caption = 'Payment';
             Editable = false;
         }

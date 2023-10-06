@@ -18,60 +18,103 @@ table 50402 "Agreement Table"
             DataClassification = ToBeClassified;
             // TableRelation = "Property Table1";
             TableRelation = "Property Table1" where(Status = filter(Booked));
+            trigger OnValidate()
+            var
+                properties: Record "Property Table1";
+                CustomerList: Record Customer;
+            begin
+                properties.SetFilter("Property No", Rec."Property No.");
+                if properties.FindSet() then begin
+                    Rec."Property Description" := properties."Property Description";
+                    Rec."Property Owner" := properties."Property Owner";
+                    Rec."Property Deposit Amount" := properties."Deposit Amount";
+                    Rec."Customer No." := properties."Tenant No";
+                end;
+                CustomerList.SetFilter("No.", Rec."Customer No.");
+                if CustomerList.FindSet() then begin
+                    Rec."Customer Name" := CustomerList.Name;
+                    Rec."Customer Address" := CustomerList.Address;
+                    Rec."Customer Phone" := CustomerList."Mobile Phone No.";
+                    Rec."Customer City" := CustomerList.City;
+                    Rec."Customer Mail" := CustomerList."E-Mail";
+                end;
+            end;
 
         }
         field(4; "Property Description"; Code[30])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Property Description" where("Property No" = field("Property No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Property Description" where("Property No" = field("Property No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(5; "Property Owner"; text[30])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Property Owner" where("Property No" = field("Property No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Property Owner" where("Property No" = field("Property No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(6; "Property Deposit Amount"; Decimal)
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Deposit Amount" where("Property No" = field("Property No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Deposit Amount" where("Property No" = field("Property No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(7; "Customer No."; Code[20])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup("Property Table1"."Tenant No" where("Property No" = field("Property No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup("Property Table1"."Tenant No" where("Property No" = field("Property No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
+            // trigger OnValidate()
+            // var
+            //     CustomerList: Record Customer;
+            // begin
+            //     CustomerList.SetFilter("No.", Rec."Customer No.");
+            //     if CustomerList.FindSet() then begin
+            //         Rec."Customer Name" := CustomerList.Name;
+            //         Rec."Customer Address" := CustomerList.Address;
+            //         Rec."Customer Phone" := CustomerList."Mobile Phone No.";
+            //         Rec."Customer City" := CustomerList.City;
+            //         Rec."Customer Mail" := CustomerList."E-Mail";
+            //     end;
+            // end;
         }
         field(8; "Customer Name"; Code[100])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer.Name where("No." = field("Customer No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer.Name where("No." = field("Customer No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(9; "Customer Address"; Code[100])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer.Address where("No." = field("Customer No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer.Address where("No." = field("Customer No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(10; "Customer Phone"; Code[100])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer."Mobile Phone No." where("No." = field("Customer No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer."Mobile Phone No." where("No." = field("Customer No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(11; "Customer City"; Code[100])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer.City where("No." = field("Customer No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer.City where("No." = field("Customer No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(12; "Customer Mail"; Code[100])
         {
-            FieldClass = FlowField;
-            CalcFormula = lookup(Customer."E-Mail" where("No." = field("Customer No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(Customer."E-Mail" where("No." = field("Customer No.")));
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(13; "Agreement Sign"; Boolean)

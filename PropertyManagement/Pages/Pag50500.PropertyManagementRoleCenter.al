@@ -151,6 +151,7 @@ profile PropertyManager
 {
     Caption = 'Property Manager';
     RoleCenter = PropertyManagementRoleCenter;
+    Enabled = true;
 }
 
 

@@ -191,10 +191,6 @@ page 50312 RentCardPage
         RentLine.SetFilter("Rent No.", Rec.RentNo);
         if RentLine.FindSet() then begin
             InvoiceDrpWn := false;
-        end
-        else begin
-            Rec.PayRentAmount := Rec.RentAmount;
-            Rec.Modify(true);
         end;
     end;
 

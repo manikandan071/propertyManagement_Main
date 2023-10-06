@@ -22,6 +22,10 @@ page 50311 RentListPage
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
                 }
+                field("Tenant detail"; Rec."Tenant detail")
+                {
+                    ToolTip = 'Specifies the value of the PropertyNo field.';
+                }
                 field(RentAmount; Rec.RentAmount)
                 {
                     ToolTip = 'Specifies the value of the Amount field.';
