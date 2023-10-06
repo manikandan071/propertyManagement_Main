@@ -1,17 +1,15 @@
 page 50316 "Inspection Page"
 {
-    PageType = Card;
-    ApplicationArea = All;
-    UsageCategory = Administration;
+    PageType = Document;
     SourceTable = "Inspection Table";
-
+    Caption = 'Inspection';
     layout
     {
         area(Content)
         {
             group(General)
             {
-                field("Inspection  No."; Rec."Inspection  No.")
+                field("Inspection  No."; Rec."Inspection No.")
                 {
                     ApplicationArea = All;
                 }
@@ -23,10 +21,6 @@ page 50316 "Inspection Page"
                 {
                     ApplicationArea = All;
                 }
-                field("Maintenance Description"; Rec."Maintenance Description")
-                {
-                    ApplicationArea = All;
-                }
                 field("Assigned By"; Rec."Assigned By1")
                 {
                     ApplicationArea = All;
@@ -35,6 +29,11 @@ page 50316 "Inspection Page"
                 {
                     ApplicationArea = All;
                 }
+            }
+            part(lines; "Inspection Subform")
+            {
+                ApplicationArea = all;
+                SubPageLink = "Document No." = field("Inspection No.");
             }
         }
     }

@@ -43,7 +43,6 @@ page 50320 "Headline RC Property Manager"
     }
 
     var
-        [InDataSet]
         AppNameHeadlineVisible: Boolean;
         FirstInsightText: Text;
         SecondInsightText: Text;

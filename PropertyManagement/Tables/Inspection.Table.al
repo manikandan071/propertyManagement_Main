@@ -1,10 +1,11 @@
 table 50410 "Inspection Table"
 {
     DataClassification = ToBeClassified;
-
+    DrillDownPageId = "Inspection List";
+    LookupPageId = "Inspection List";
     fields
     {
-        field(1; "Inspection  No."; Code[20])
+        field(1; "Inspection No."; Code[20])
         {
             DataClassification = ToBeClassified;
             Editable = false;
@@ -42,7 +43,7 @@ table 50410 "Inspection Table"
 
     keys
     {
-        key(Key1; "Inspection  No.")
+        key(Key1; "Inspection No.")
         {
             Clustered = true;
         }
@@ -50,7 +51,7 @@ table 50410 "Inspection Table"
 
     fieldgroups
     {
-        fieldgroup(DropDown; "Inspection  No.", "Property No.", "Property Description", "Maintenance Description") { }
+        fieldgroup(DropDown; "Inspection No.", "Property No.", "Property Description", "Maintenance Description") { }
     }
 
     var
@@ -64,7 +65,7 @@ table 50410 "Inspection Table"
     begin
         InspectionNoSeries.Get();
         InspectionNoSeries.TestField("Inspection No Series");
-        NoSeriesMgt.InitSeries(InspectionNoSeries."Inspection No Series", InspectionNoSeries."Inspection No Series", 0D, "Inspection  No.", InspectionNoSeries."Inspection No Series");
+        NoSeriesMgt.InitSeries(InspectionNoSeries."Inspection No Series", InspectionNoSeries."Inspection No Series", 0D, "Inspection No.", InspectionNoSeries."Inspection No Series");
 
         // LinesTable.Init();
         // LinesTable."Inspection No" := Rec."Property No.";

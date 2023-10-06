@@ -12,11 +12,15 @@ page 50319 "Maintenance Subform"
         {
             repeater(GroupName)
             {
-                field("Document No"; Rec."Document No")
-                {
-                    ApplicationArea = All;
-                }
-                field("Inspection No"; Rec."Inspection No")
+                // field("Document No"; Rec."Document No")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Inspection No"; Rec."Inspection No")
+                // {
+                //     ApplicationArea = All;
+                // }
+                field(Service; Rec.Service)
                 {
                     ApplicationArea = All;
                 }
@@ -27,15 +31,19 @@ page 50319 "Maintenance Subform"
                 field("Vendor No"; Rec."Vendor No")
                 {
                     ApplicationArea = All;
+                    // trigger OnLookup(var Text: Text): Boolean
+                    // var
+                    //     Charges: Record "Vendor Charges Lines New";
+                    // begin
+                    //     Charges.Reset();
+                    //     if Page.RunModal(Page::"Vendor Charges Subform",Charges)=Action::LookupOK then
+                    // end;
                 }
                 field("Vendor Name"; Rec."Vendor Name")
                 {
                     ApplicationArea = All;
                 }
-                field(Service; Rec.Service)
-                {
-                    ApplicationArea = All;
-                }
+
                 field("Service charge"; Rec."Service charge")
                 {
                     ApplicationArea = All;

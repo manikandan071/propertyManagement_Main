@@ -12,7 +12,7 @@ page 50315 "Inspection List"
         {
             repeater(GroupName)
             {
-                field("Inspection  No."; Rec."Inspection  No.")
+                field("Inspection  No."; Rec."Inspection No.")
                 {
                     ApplicationArea = All;
                 }
@@ -21,10 +21,6 @@ page 50315 "Inspection List"
                     ApplicationArea = All;
                 }
                 field("Property Description"; Rec."Property Description")
-                {
-                    ApplicationArea = All;
-                }
-                field("Maintenance Description"; Rec."Maintenance Description")
                 {
                     ApplicationArea = All;
                 }

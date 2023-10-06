@@ -44,7 +44,7 @@ page 50307 "Vendor Charges"
             part(lines; "Vendor Charges Subform")
             {
                 ApplicationArea = all;
-                SubPageLink = "Document No." = field("Charge No.");
+                SubPageLink = "Document No." = field("Charge No."), VendorNumber = field("Vendor No.");
             }
         }
     }

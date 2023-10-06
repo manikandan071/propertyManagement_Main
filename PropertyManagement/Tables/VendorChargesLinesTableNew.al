@@ -20,6 +20,20 @@ table 50415 "Vendor Charges Lines New"
             DataClassification = ToBeClassified;
             Caption = 'Service Description';
             TableRelation = Services;
+            trigger OnValidate()
+            var
+                VendorCharges: Record "Vendor Charges Lines New";
+            begin
+                VendorCharges.SetFilter("Document No.", Rec."Document No.");
+                if VendorCharges.FindSet() then begin
+                    repeat
+                        if VendorCharges."Service Description" = Rec."Service Description" then begin
+                            Rec."Service Description" := '';
+                            Message('Already have specific Service');
+                        end;
+                    until VendorCharges.Next() = 0;
+                end;
+            end;
         }
         field(4; "Service Charge"; Integer)
         {
@@ -32,13 +46,13 @@ table 50415 "Vendor Charges Lines New"
             DataClassification = ToBeClassified;
             Caption = 'Vendor Details';
             Editable = false;
-            TableRelation = Vendor;
+            // TableRelation = Vendor;
         }
     }
 
     keys
     {
-        key(Key1; "Charge Line No.", "Document No.")
+        key(Key1; "Charge Line No.", "Document No.", VendorNumber)
         {
             Clustered = true;
         }
@@ -46,7 +60,7 @@ table 50415 "Vendor Charges Lines New"
 
     fieldgroups
     {
-        fieldgroup(DropDown; "Charge Line No.", VendorNumber, "Service Description", "Service Charge") { }
+        fieldgroup(DropDown; VendorNumber, "Service Description", "Service Charge") { }
     }
 
     var
@@ -79,7 +93,7 @@ table 50415 "Vendor Charges Lines New"
 
     trigger OnModify()
     begin
-        InsertVendorDetails();
+        // InsertVendorDetails();
     end;
 
     trigger OnDelete()
