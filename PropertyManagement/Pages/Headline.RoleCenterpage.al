@@ -70,15 +70,11 @@ page 50320 "Headline RC Property Manager"
 
         OnSetVisibility(AppNameHeadlineVisible);
 
-        UserPermission.SetRange("User Security ID", UserSecurityId());
-
-        UserPermission.SetFilter("Role ID", 'TESTSET');
-
-        if UserPermission.IsEmpty() then begin
-
-            Error('You are not a part of admin..');
-
-        end;
+        // UserPermission.SetRange("User Security ID", UserSecurityId());
+        // UserPermission.SetFilter("Role ID", 'TESTSET');
+        // if UserPermission.IsEmpty() then begin
+        //     Error('You are not a part of admin..');
+        // end;
     end;
 
     local procedure HandleVisibility()
