@@ -10,4 +10,15 @@ pageextension 50304 "Customer Card Extension" extends "Customer Card"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        UserPermission: Record "Access Control";
+    begin
+        UserPermission.SetRange("User Security ID", UserSecurityId());
+        UserPermission.SetFilter("Role ID", 'TESTSET');
+        // if UserPermission.IsEmpty() then begin
+        //     Error('You are not a part of admin..');
+        // end;
+    end;
 }
