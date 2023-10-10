@@ -20,6 +20,7 @@ codeunit 50402 "User Management ext"
                         Message('%1', UserSetting."Profile ID");
                         if UserSetting."Profile ID" = '' then begin
                             Message('%1', UserSetting."Profile ID");
+
                             // MyRole."Profile ID" := 'PROPERTYMANAGER';
                             // MyRole.Modify(true);
                             // Commit();
