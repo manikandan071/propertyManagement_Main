@@ -34,17 +34,26 @@ page 50325 "User Settings Page"
 
     trigger OnOpenPage()
     var
-        myInt: Integer;
-        user: Record User;
         UserPersonalization: Record "User Personalization";
-        RolesData: Record "All Profile";
-        RecRefprofile: Code[30];
+        sessionSetting: SessionSettings;
     begin
-        // RolesData.Reset();
-        // RolesData.SetRange("Profile ID", 'PROPERTYMANAGER');
-        // if RolesData.FindFirst() then begin
-        //     RecRefprofile := RolesData."Profile ID";
-        //     Message(RecRefprofile);
-        // end
+
+
+        // UserPersonalization.Init();
+        // UserPersonalization.Reset();
+        // UserPersonalization.SetRange("User ID", UserId);
+        // if UserPersonalization.FindFirst() then begin
+        //     Message(UserPersonalization."Profile ID");
+        //     if UserPersonalization."Profile ID" <> 'PROPERTYMANAGER' then begin
+        //         Message('Going to change as property manager as new');
+        //         UserPersonalization."Profile ID" := 'PROPERTYMANAGER';
+        //         UserPersonalization."App ID" := '{831712C8-B7FB-4EFE-B90F-2011CE925325}';
+        //         UserPersonalization.Modify(true);
+        //         commit();
+        //         sessionSetting.Init();
+        //         sessionSetting.ProfileId := 'PROPERTYMANAGER';
+        //         sessionSetting.RequestSessionUpdate(true);
+        //     end;
+        // end;
     end;
 }
