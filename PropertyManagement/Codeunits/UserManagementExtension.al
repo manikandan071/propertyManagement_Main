@@ -4,38 +4,35 @@ codeunit 50402 "User Management ext"
     local procedure sendNotification()
     var
         user: Record User;
-        MyRole: Record "User Personalization";
+        UserPersonalization: Record "User Personalization";
+        RolesData: Record "All Profile";
         MyControl: Record "Access Control";
         UserSetting: Record "User Settings";
         sessionSetting: SessionSettings;
+        RecRefprofile: Record "All Profile";
     begin
-        if user.Get(UserSecurityId) then begin
-            // Message('%1 %2 %3', UserId, user."Full Name", user."User Security ID");
-            MyControl.SetRange("User Security ID", user."User Security ID");
-            if MyControl.FindSet() then begin
-                repeat
-                    if MyControl."Role ID" = 'RENTMODULE' then begin
-                        Message('%1', MyControl."Role ID");
-                        UserSetting.SetFilter("User Security ID", user."User Security ID");
-                        Message('%1', UserSetting."Profile ID");
-                        if UserSetting."Profile ID" = '' then begin
-                            Message('%1', UserSetting."Profile ID");
-                            // MyRole."Profile ID" := 'PROPERTYMANAGER';
-                            // MyRole.Modify(true);
-                            // Commit();
-                            // UserSetting."Profile ID" := 'PROPERTYMANAGER';
-                            // UserSetting.Modify(true);
-                            // sessionSetting.Init();
-                            // Commit();
-                            // sessionSetting.ProfileId := 'PROPERTYMANAGER';
-                            // sessionSetting.RequestSessionUpdate(true);
-                        end;
-                    end;
-                until MyControl.Next() = 0;
-            end;
+
+        RolesData.Reset();
+        RolesData.SetRange("Profile ID", 'PROPERTYMANAGER');
+        if RolesData.FindFirst() then begin
+            RecRefprofile := RolesData;
         end;
-        if MyRole.Get(UserSecurityId) then begin
-            // Message('login %1, %2, %3, %4', MyRole."Profile ID", MyRole."Full Name", MyRole."User ID", MyRole.SystemId);
+
+
+        UserPersonalization.Init();
+        UserPersonalization.Reset();
+        UserPersonalization.SetRange("User ID", UserId);
+        if UserPersonalization.FindFirst() then begin
+            if UserPersonalization."Profile ID" <> 'PROPERTY MANAGER' then begin
+                Message('Going to change as property manager');
+                UserPersonalization."Profile ID" := RecRefprofile."Profile ID";
+                //UserPersonalization.Role := RecRefprofile."Profile ID";
+                UserPersonalization.Modify(true);
+                Commit();
+                // sessionSetting.Init();
+                // sessionSetting.ProfileId := RecRefprofile."Profile ID";
+                // sessionSetting.RequestSessionUpdate(true);
+            end;
         end;
     end;
 
@@ -51,4 +48,5 @@ codeunit 50402 "User Management ext"
 
     var
         myInt: Integer;
+        UserSetup: Record "User Setup";
 }
