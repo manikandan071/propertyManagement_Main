@@ -19,7 +19,7 @@ codeunit 50402 "User Management ext"
 
 
                 sessionSetting.Init();
-                sessionSetting.ProfileId := 'PROPERTYMANAGER';
+                sessionSetting.ProfileId('PROPERTYMANAGER');
                 sessionSetting.RequestSessionUpdate(true);
 
 
@@ -34,7 +34,7 @@ codeunit 50402 "User Management ext"
 
     trigger OnRun()
     begin
-
+        sendNotification();
     end;
 
     var
