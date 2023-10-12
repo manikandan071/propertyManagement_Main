@@ -29,8 +29,30 @@ page 50325 "User Settings Page"
 
                 }
             }
+
         }
     }
+
+    actions
+    {
+        area(Creation)
+        {
+            // group(TestGroup)
+            // {
+            action(ChangeSession)
+            {
+                ApplicationArea = All;
+
+                trigger OnAction()
+                begin
+                    //usermgmnt.Run()
+                end;
+                //}
+            }
+        }
+    }
+
+
 
     trigger OnOpenPage()
     var
@@ -56,4 +78,7 @@ page 50325 "User Settings Page"
         //     end;
         // end;
     end;
+
+    var
+        usermgmnt: Codeunit "User Management ext";
 }
