@@ -100,36 +100,40 @@ page 50304 "Agreement Card Page"
                     GLPost: Codeunit "Gen. Jnl.-Post Line";
                     Line: Record "Gen. Journal Line";
                 begin
-                    PropertyDetails.Init();
-                    PropertyDetails.Reset();
-                    PropertyDetails.SetRange("Property No", Rec."Property No.");
-                    if PropertyDetails.FindFirst() AND not Rec."Agreement Sign" then begin
-                        PropertyDetails.Status := PropertyDetails.Status::"Agreement Signed";
-                        PropertyDetails.Modify();
+                    if not isAdmin then begin
+                        PropertyDetails.Init();
+                        PropertyDetails.Reset();
+                        PropertyDetails.SetRange("Property No", Rec."Property No.");
+                        if PropertyDetails.FindFirst() AND not Rec."Agreement Sign" then begin
+                            PropertyDetails.Status := PropertyDetails.Status::"Agreement Signed";
+                            PropertyDetails.Modify();
 
-                        Line.Init();
-                        Line."Posting Date" := Today();
-                        Line."Document Type" := Line."Document Type"::Payment;
-                        Line."Document No." := Rec."Gen. Jrnl Document no";
-                        Line."Account Type" := Line."Account Type"::"G/L Account";
-                        Line."Account No." := '9514';
-                        // Line."Applies-to Doc. Type" := Line."Applies-to Doc. Type"::Invoice;
-                        // Line."Applies-to Doc. No." := Rec."Invoice No";
-                        Line."Bal. Account Type" := Line."Bal. Account Type"::"Bank Account";
-                        Line."Bal. Account No." := 'B030';
-                        Line.Description := 'For ' + Rec."Customer Name" + ' Deposit Amount Credited';
-                        Line.Amount := -1 * Rec."Property Deposit Amount";
-                        Line.Validate("Shortcut Dimension 1 Code", 'Sales');
-                        GLPost.RunWithCheck(Line);
+                            Line.Init();
+                            Line."Posting Date" := Today();
+                            Line."Document Type" := Line."Document Type"::Payment;
+                            Line."Document No." := Rec."Gen. Jrnl Document no";
+                            Line."Account Type" := Line."Account Type"::"G/L Account";
+                            Line."Account No." := '9514';
+                            // Line."Applies-to Doc. Type" := Line."Applies-to Doc. Type"::Invoice;
+                            // Line."Applies-to Doc. No." := Rec."Invoice No";
+                            Line."Bal. Account Type" := Line."Bal. Account Type"::"Bank Account";
+                            Line."Bal. Account No." := 'B030';
+                            Line.Description := 'For ' + Rec."Customer Name" + ' Deposit Amount Credited';
+                            Line.Amount := -1 * Rec."Property Deposit Amount";
+                            Line.Validate("Shortcut Dimension 1 Code", 'Sales');
+                            GLPost.RunWithCheck(Line);
 
-                        HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50302&dc=0&bookmark=1D_48QAAAJ7_1AAVABOAFUATQAwADAAMQAy';
-                        HtmlContent := '<h1>Property ' + Rec."Property Description" + 'Agreement signed for ' + Rec."Customer Name" + '</h1><a href=' + HTmlLink + '>Clik here</a>';
-                        EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
-                        SEmail.Send(EmailMessage);
-                        Message('Agreement Assigned and Deposit Amount Paid successfully');
-                        Rec."Agreement Sign" := true;
-                        Rec.Modify();
-                    end;
+                            HTmlLink := 'https://businesscentral.dynamics.com/Sandbox?company=CRONUS%20IN&page=50302&dc=0&bookmark=1D_48QAAAJ7_1AAVABOAFUATQAwADAAMQAy';
+                            HtmlContent := '<h1>Property ' + Rec."Property Description" + 'Agreement signed for ' + Rec."Customer Name" + '</h1><a href=' + HTmlLink + '>Clik here</a>';
+                            EmailMessage.Create('Kalimuthu@chandrudemo.onmicrosoft.com', 'Test Subject', HtmlContent, true);
+                            SEmail.Send(EmailMessage);
+                            Message('Agreement Assigned and Deposit Amount Paid successfully');
+                            Rec."Agreement Sign" := true;
+                            Rec.Modify();
+                        end;
+                    end
+                    else
+                        Message('Already Agreement Signed');
                 end;
             }
         }
@@ -141,7 +145,7 @@ page 50304 "Agreement Card Page"
     var
         userID: Text;
         ApprovalUsers: Record "User Setup";
-
+        AccessContral: Record "Access Control";
     begin
         userID := Database.UserId();
         isAdmin := false;
@@ -152,6 +156,14 @@ page 50304 "Agreement Card Page"
             if ApprovalUsers."User ID" = userID then begin
                 isAdmin := true;
             end;
+        end;
+        AccessContral.SetRange("User Security ID", UserSecurityId());
+        if AccessContral.FindSet() then begin
+            repeat
+                if AccessContral."Role ID" = 'RENTACCOUNTANT' then begin
+                    isAdmin := true;
+                end;
+            until AccessContral.Next() = 0;
         end;
         if Rec."Agreement Sign" then CurrPage.Editable(false);
     end;

@@ -108,7 +108,7 @@ page 50314 TenantExitCardPage
     var
         userID: Text;
         ApprovalUsers: Record "User Setup";
-
+        AccessContral: Record "Access Control";
     begin
         userID := Database.UserId();
         isAdmin := false;
@@ -119,6 +119,14 @@ page 50314 TenantExitCardPage
             if ApprovalUsers."User ID" = userID then begin
                 isAdmin := true;
             end;
+        end;
+        AccessContral.SetRange("User Security ID", UserSecurityId());
+        if AccessContral.FindSet() then begin
+            repeat
+                if AccessContral."Role ID" = 'RENTACCOUNTANT' then begin
+                    isAdmin := true;
+                end;
+            until AccessContral.Next() = 0;
         end;
         if Rec.Status then CurrPage.Editable(false);
     end;

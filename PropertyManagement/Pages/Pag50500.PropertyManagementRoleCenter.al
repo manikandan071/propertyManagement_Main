@@ -21,17 +21,17 @@ page 50500 PropertyManagementRoleCenter
     {
         area(Sections)
         {
-            // group(PropertyManagement)
-            // {
-            //     Caption = 'Property Management';
-            //     action("Property Details")
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = 'Property Details';
-            //         RunObject = page "Property List";
-            //     }
+            group(PropertyManagement)
+            {
+                Caption = 'Property Management';
+                action("Property Details")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Property Details';
+                    RunObject = page "Property List";
+                }
 
-            // }
+            }
         }
 
         area(Creation)
@@ -132,17 +132,17 @@ page 50500 PropertyManagementRoleCenter
             }
         }
 
-        // area(Processing)
-        // {
-        //     action(BookProperty)
-        //     {
-        //         Caption = 'Register New Booking';
-        //         Image = NewInvoice;
-        //         RunObject = Page "Property List";
-        //         RunPageMode = View;
-        //     }
+        area(Processing)
+        {
+            action(BookProperty)
+            {
+                Caption = 'Register New Booking';
+                Image = NewInvoice;
+                RunObject = Page "Property List";
+                RunPageMode = View;
+            }
 
-        // }
+        }
 
     }
 }

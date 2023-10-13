@@ -5,26 +5,63 @@ codeunit 50402 "User Management ext"
     var
         UserPersonalization: Record "User Personalization";
         sessionSetting: SessionSettings;
+        AccessContral: Record "Access Control";
+        RoleCenter: Page PropertyManagementRoleCenter;
+        Notification: Codeunit "Login Notification";
     begin
         UserPersonalization.Init();
         UserPersonalization.Reset();
         UserPersonalization.SetRange("User ID", UserId);
         if UserPersonalization.FindFirst() then begin
-            if UserPersonalization."Profile ID" <> 'PROPERTYMANAGER' then begin
-
-
-                UserPersonalization."Profile ID" := 'PROPERTYMANAGER';
-                UserPersonalization."App ID" := '{831712C8-B7FB-4EFE-B90F-2011CE925325}';
-                UserPersonalization.Modify(true);
-
-
-                sessionSetting.Init();
-                sessionSetting.ProfileId('PROPERTYMANAGER');
-                sessionSetting.RequestSessionUpdate(true);
-
-
+            // Message('%1', UserPersonalization."Profile ID");
+            AccessContral.SetRange("User Security ID", UserSecurityId());
+            if AccessContral.FindSet() then begin
+                repeat
+                    if AccessContral."Role ID" = 'RENTACCOUNTANT' then begin
+                        // Message('%1', UserPersonalization."Profile ID");
+                        if UserPersonalization."Profile ID" <> 'RENTACCOUNTANT' then begin
+                            UserPersonalization."Profile ID" := 'RENTACCOUNTANT';
+                            UserPersonalization."App ID" := AccessContral."App ID";
+                            UserPersonalization.Modify(true);
+                            Notification.Run();
+                            // sessionSetting.Init();
+                            // sessionSetting.ProfileId := 'PROPERTYMANAGER';
+                            // sessionSetting.RequestSessionUpdate(true);
+                        end;
+                    end
+                    else
+                        if AccessContral."Role ID" = 'PROPERTYSALESMAN' then begin
+                            Message('%1', UserPersonalization."Profile ID");
+                            if UserPersonalization."Profile ID" <> 'PROPERTYSALESMAN' then begin
+                                UserPersonalization."Profile ID" := 'PROPERTYSALESMAN';
+                                UserPersonalization."App ID" := AccessContral."App ID";
+                                UserPersonalization.Modify(true);
+                                Notification.Run();
+                                // sessionSetting.Init();
+                                // sessionSetting.ProfileId := 'PROPERTYMANAGER';
+                                // sessionSetting.RequestSessionUpdate(true);
+                            end;
+                        end
+                        else
+                            if AccessContral."Role ID" = 'PROPERTYMAINTENANCE' then begin
+                                Message('%1', UserPersonalization."Profile ID");
+                                if UserPersonalization."Profile ID" <> 'MAINTENANCEMANAGER' then begin
+                                    UserPersonalization."Profile ID" := 'MAINTENANCEMANAGER';
+                                    UserPersonalization."App ID" := AccessContral."App ID";
+                                    UserPersonalization.Modify(true);
+                                    Notification.Run();
+                                    // sessionSetting.Init();
+                                    // sessionSetting.ProfileId := 'PROPERTYMANAGER';
+                                    // sessionSetting.RequestSessionUpdate(true);
+                                end;
+                            end;
+                until AccessContral.Next() = 0;
             end;
+            // Page.Run(Page::PropertyManagementRoleCenter);
+            // RoleCenter.Run();
+            // RoleCenter.update(true);
         end;
+        // Notification.Run();
     end;
 
     local procedure MyProcedure()
@@ -34,7 +71,7 @@ codeunit 50402 "User Management ext"
 
     trigger OnRun()
     begin
-        sendNotification();
+
     end;
 
     var
