@@ -12,8 +12,13 @@ page 50500 PropertyManagementRoleCenter
             {
                 ApplicationArea = Basic, Suite;
             }
+            part(Control16; "Property Cue Page")
+            {
+                Caption = 'Property Management';
+                AccessByPermission = TableData "Property Cue Table" = I;
+                ApplicationArea = Basic, Suite;
+            }
         }
-
     }
 
 
