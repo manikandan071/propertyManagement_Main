@@ -14,8 +14,18 @@ page 50500 PropertyManagementRoleCenter
             }
             part(Control16; "Property Cue Page")
             {
-                Caption = 'Property Management';
+                Caption = 'Activities';
                 AccessByPermission = TableData "Property Cue Table" = I;
+                ApplicationArea = Basic, Suite;
+            }
+            part(PowerBIEmbeddedReportPart; "Power BI Embedded Report Part")
+            {
+                AccessByPermission = TableData "Power BI User Configuration" = I;
+                ApplicationArea = Basic, Suite;
+            }
+            part(PowerBIEmbeddedReportPart1; "Power BI Embedded Report Part")
+            {
+                AccessByPermission = TableData "Power BI User Configuration" = I;
                 ApplicationArea = Basic, Suite;
             }
         }
