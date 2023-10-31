@@ -18,11 +18,11 @@ page 50308 "Vendor Charges Subform"
                 //     ApplicationArea = All;
                 //     ToolTip = 'Specifies type of the Document No.';
                 // }
-                field(VendorNumber; Rec.VendorNumber)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies Vendor No.';
-                }
+                // field(VendorNumber; Rec.VendorNumber)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies Vendor No.';
+                // }
                 field("Service Description"; Rec."Service Description")
                 {
                     ApplicationArea = All;

@@ -27,6 +27,7 @@ table 50408 RentTable
                     Rec.RentAmount := properties."Rent Amount";
                     Rec."Tenant No." := properties."Tenant No";
                     Rec."Tenant detail" := properties."Tenant detail";
+                    Rec.PayRentAmount := properties."Rent Amount";
                 end;
             end;
         }

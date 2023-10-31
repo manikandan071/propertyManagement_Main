@@ -34,7 +34,7 @@ table 50403 "Property Table1"
         {
             DataClassification = ToBeClassified;
             OptionMembers = "Available","Booked","Agreement Signed";
-            // Editable = false;
+            Editable = false;
         }
         field(5; "Tenant detail"; Text[30])
         {

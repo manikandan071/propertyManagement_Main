@@ -100,7 +100,7 @@ page 50304 "Agreement Card Page"
                     GLPost: Codeunit "Gen. Jnl.-Post Line";
                     Line: Record "Gen. Journal Line";
                 begin
-                    if not isAdmin then begin
+                    if isAdmin then begin
                         PropertyDetails.Init();
                         PropertyDetails.Reset();
                         PropertyDetails.SetRange("Property No", Rec."Property No.");
@@ -130,10 +130,12 @@ page 50304 "Agreement Card Page"
                             Message('Agreement Assigned and Deposit Amount Paid successfully');
                             Rec."Agreement Sign" := true;
                             Rec.Modify();
-                        end;
+                        end
+                        else
+                            Message('Already Agreement Signed');
                     end
                     else
-                        Message('Already Agreement Signed');
+                        Message('You do not have permission');
                 end;
             }
         }

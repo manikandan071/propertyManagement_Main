@@ -36,6 +36,7 @@ table 50407 BookingTable
         field(7; Status; Enum "Custom Approval Enum")
         {
             Caption = 'Status';
+            Editable = false;
         }
         field(8; PhoneNumber1; Text[30])
         {

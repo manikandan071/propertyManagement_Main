@@ -20,6 +20,7 @@ page 50312 RentCardPage
                 field(PropertyNo; Rec.PropertyNo)
                 {
                     ToolTip = 'Specifies the value of the PropertyNo field.';
+                    // Editable = InvoiceDrpWn;
                 }
 
                 field(RentAmount; Rec.RentAmount)
@@ -125,7 +126,7 @@ page 50312 RentCardPage
                                         Rec.PayRentAmount := Rec.RentAmount - (PaidAmount + Rec.PayRentAmount);
                                         Rec."Date Of Paid" := Today;
                                         Rec.Modify();
-                                        Message('Rent Paid');
+                                        Message('Rent Paid Successfully');
                                         if Rec.PayRentAmount = 0 then begin
                                             Rec.Ispayment := true;
                                             Rec.Modify();
@@ -160,7 +161,7 @@ page 50312 RentCardPage
                                         Rec.PayRentAmount := Rec.RentAmount - Rec.PayRentAmount;
                                         Rec."Date Of Paid" := Today;
                                         Rec.Modify();
-                                        Message(('Rent Paid'));
+                                        Message(('Rent Paid Successfully'));
                                         if Rec.PayRentAmount = 0 then begin
                                             Rec.Ispayment := true;
                                             Rec.Modify();
@@ -175,7 +176,7 @@ page 50312 RentCardPage
                         end;
                     end
                     else
-                        Message('Enter Invoice No.');
+                        Message('Please Enter Invoice No.');
                 end;
             }
         }
