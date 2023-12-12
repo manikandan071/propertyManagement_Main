@@ -27,6 +27,6 @@ page 50330 "Property Cue Page"
     begin
         p.Init();
         p.SetFilter(Status, 'Pending');
-        Message('%1', p.Count());
+        // Message('%1', p.Count());
     end;
 }

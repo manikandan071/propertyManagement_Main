@@ -193,7 +193,7 @@ page 50310 BookingCardPage
                             Customer."VAT Bus. Posting Group" := Rec."VAT Bus. Posting Group";
                             Customer.Insert(true);
                             Customer.FindLast();
-                            Message('%1, %2', Customer."No.", Customer.Name);
+                            // Message('%1, %2', Customer."No.", Customer.Name);
                             PropertyList.Init();
                             PropertyList.Reset();
                             PropertyList.SetFilter(PropertyList."Property No", Rec.PropertyNo);

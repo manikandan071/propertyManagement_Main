@@ -75,7 +75,7 @@ table 50401 "Property Table"
         "Property No Series".Init();
         if "Property No Series".FindSet() then
             repeat
-                Message('Property No %1', "Property No Series"."Property No Series");
+                // Message('Property No %1', "Property No Series"."Property No Series");
                 IF "Property No" = '' then
                     NoSeriesMgt.InitSeries("Property No Series"."Property No Series", "Property No Series"."Property No Series", 0D, "Property No", "Property No Series"."Property No Series");
             until "Property No Series".Next() = 0;

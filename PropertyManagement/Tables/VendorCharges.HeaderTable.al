@@ -61,7 +61,7 @@ table 50404 "Vendor Charges Header"
         if "Properties No Series".FindSet() then
             repeat
                 IF "Charge No." = '' then
-                    Message('Property No %1', "Properties No Series"."Charges No Series");
+                    // Message('Property No %1', "Properties No Series"."Charges No Series");
                 NoSeriesMgt.InitSeries("Properties No Series"."Charges No Series", "Properties No Series"."Charges No Series", 0D, "Charge No.", "Properties No Series"."Charges No Series");
             until "Properties No Series".Next() = 0;
     end;

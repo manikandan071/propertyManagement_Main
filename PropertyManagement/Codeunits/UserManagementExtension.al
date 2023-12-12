@@ -31,7 +31,7 @@ codeunit 50402 "User Management ext"
                     end
                     else
                         if AccessContral."Role ID" = 'PROPERTYSALESMAN' then begin
-                            Message('%1', UserPersonalization."Profile ID");
+                            // Message('%1', UserPersonalization."Profile ID");
                             if UserPersonalization."Profile ID" <> 'PROPERTYSALESMAN' then begin
                                 UserPersonalization."Profile ID" := 'PROPERTYSALESMAN';
                                 UserPersonalization."App ID" := AccessContral."App ID";
@@ -44,7 +44,7 @@ codeunit 50402 "User Management ext"
                         end
                         else
                             if AccessContral."Role ID" = 'PROPERTYMAINTENANCE' then begin
-                                Message('%1', UserPersonalization."Profile ID");
+                                // Message('%1', UserPersonalization."Profile ID");
                                 if UserPersonalization."Profile ID" <> 'MAINTENANCEMANAGER' then begin
                                     UserPersonalization."Profile ID" := 'MAINTENANCEMANAGER';
                                     UserPersonalization."App ID" := AccessContral."App ID";
